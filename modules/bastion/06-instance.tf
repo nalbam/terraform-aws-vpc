@@ -2,6 +2,12 @@ data "template_file" "setup" {
   template = "${file("${path.module}/files/setup.sh")}"
 }
 
+resource "aws_key_pair" "bastion" {
+  count      = "${var.public_key_path != "" ? 1 : 0}"
+  key_name   = "${var.key_name}"
+  public_key = "${file(var.public_key_path)}"
+}
+
 resource "aws_instance" "bastion" {
   ami                  = "${data.aws_ami.default.id}"
   instance_type        = "t2.micro"

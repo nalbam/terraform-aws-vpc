@@ -21,4 +21,14 @@ variable "key_name" {
   default = "demo"
 }
 
+variable "public_key_path" {
+  description = "The local public key path, e.g. ~/.ssh/id_rsa.pub"
+  default = ""
+}
+
+variable "base_domain" {
+  description = "Base domain of the bastion, e.g: nalbam.com"
+  default = ""
+}
+
 data "aws_availability_zones" "azs" {}

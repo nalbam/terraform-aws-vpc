@@ -3,7 +3,7 @@ variable region {
 }
 
 variable "name" {
-  description = "Name of the bastion, e.g: demo."
+  description = "Name of the bastion, e.g: demo"
   default = "demo"
 }
 
@@ -20,4 +20,14 @@ variable "vpc_cidr" {
 variable "key_name" {
   description = "The name of the key to user for ssh access, e.g: demo"
   default = "nalbam-seoul"
+}
+
+variable "public_key_path" {
+  description = "The local public key path, e.g. ~/.ssh/id_rsa.pub"
+  default = ""
+}
+
+variable "base_domain" {
+  description = "Base domain of the bastion, e.g: nalbam.com"
+  default = "nalbam.com"
 }
