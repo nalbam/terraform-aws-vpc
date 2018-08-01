@@ -3,7 +3,7 @@ data "template_file" "setup" {
 }
 
 resource "aws_instance" "bastion" {
-  ami                  = "${data.aws_ami.amazonlinux.id}"
+  ami                  = "${data.aws_ami.default.id}"
   instance_type        = "t2.micro"
   subnet_id            = "${element(aws_subnet.public.*.id, 0)}"
   iam_instance_profile = "${aws_iam_instance_profile.instance-profile.id}"

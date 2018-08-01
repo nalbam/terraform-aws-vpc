@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "name" {
-  description = "Name of the cluster, e.g: 'dev'. Useful when running multiple clusters in the same AWS account."
+  description = "Name of the cluster, e.g: 'demo'. Useful when running multiple clusters in the same AWS account."
 }
 
 variable "vpc_id" {
@@ -17,8 +17,8 @@ variable "vpc_cidr" {
 }
 
 variable "key_name" {
-  description = "The name of the key to user for ssh access, e.g: dev"
-  default = "dev"
+  description = "The name of the key to user for ssh access, e.g: demo"
+  default = "demo"
 }
 
 data "aws_availability_zones" "azs" {}

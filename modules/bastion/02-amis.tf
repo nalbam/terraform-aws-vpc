@@ -1,5 +1,5 @@
 # Define an Amazon Linux AMI.
-data "aws_ami" "amazonlinux" {
+data "aws_ami" "default" {
   most_recent = true
 
   owners = ["137112412989"] // AWS's account ID.
