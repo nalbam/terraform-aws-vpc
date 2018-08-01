@@ -12,7 +12,7 @@ resource "aws_instance" "bastion" {
   ami                  = "${data.aws_ami.default.id}"
   instance_type        = "t2.micro"
   subnet_id            = "${element(aws_subnet.public.*.id, 0)}"
-  iam_instance_profile = "${aws_iam_instance_profile.instance-profile.id}"
+  iam_instance_profile = "${aws_iam_instance_profile.bastion.id}"
   user_data            = "${data.template_file.setup.rendered}"
 
   vpc_security_group_ids = [
@@ -24,7 +24,7 @@ resource "aws_instance" "bastion" {
   key_name = "${var.key_name}"
 
   tags = {
-     Name = "${var.name} bastion"
+    Name = "${var.name} bastion"
   }
 }
 
@@ -33,6 +33,6 @@ resource "aws_eip" "bastion" {
   vpc = true
 
   tags = {
-     Name = "${var.name} bastion"
+    Name = "${var.name} bastion"
   }
 }

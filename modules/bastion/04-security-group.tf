@@ -18,7 +18,7 @@ resource "aws_security_group" "vpc" {
   }
 
   tags = {
-     Name = "${var.name} internal vpc"
+    Name = "${var.name} internal vpc"
   }
 }
 
@@ -36,7 +36,7 @@ resource "aws_security_group" "public-egress" {
   }
 
   tags = {
-     Name = "${var.name} public egress"
+    Name = "${var.name} public egress"
   }
 }
 
@@ -54,6 +54,6 @@ resource "aws_security_group" "ssh" {
   }
 
   tags = {
-     Name = "${var.name} ssh access"
+    Name = "${var.name} ssh access"
   }
 }

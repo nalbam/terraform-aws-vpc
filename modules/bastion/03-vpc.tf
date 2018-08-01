@@ -6,7 +6,7 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags = {
-     Name = "${var.name} vpc"
+    Name = "${var.name} vpc"
   }
 }
 
@@ -16,16 +16,16 @@ data "aws_vpc" "main" {
 
 // Create a public subnet.
 resource "aws_subnet" "public" {
-  vpc_id = "${data.aws_vpc.main.id}"
-
   count = "${length(data.aws_availability_zones.azs.names)}"
+
+  vpc_id = "${data.aws_vpc.main.id}"
 
   cidr_block = "${cidrsubnet(data.aws_vpc.main.cidr_block, 8, 31 + count.index)}"
   availability_zone = "${data.aws_availability_zones.azs.names[count.index]}"
   map_public_ip_on_launch = true
 
   tags = {
-     Name = "${var.name} public subnet"
+    Name = "${var.name} public subnet"
   }
 }
 
@@ -34,7 +34,7 @@ resource "aws_internet_gateway" "public" {
   vpc_id = "${data.aws_vpc.main.id}"
 
   tags = {
-     Name = "${var.name} public internet gateway"
+    Name = "${var.name} public internet gateway"
   }
 }
 
@@ -48,7 +48,7 @@ resource "aws_route_table" "public" {
   }
 
   tags = {
-     Name = "${var.name} public route table"
+    Name = "${var.name} public route table"
   }
 }
 

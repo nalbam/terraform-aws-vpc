@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "name" {
-  description = "Name of the cluster, e.g: 'demo'. Useful when running multiple clusters in the same AWS account."
+  description = "Name of the cluster, e.g: demo"
 }
 
 variable "vpc_id" {
