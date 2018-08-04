@@ -1,12 +1,30 @@
 # bastion
 
+provider "aws" {
+  region = "ap-northeast-2"
+}
+
+terraform {
+  backend "s3" {
+    region = "ap-northeast-2"
+    bucket = "terraform-nalbam-seoul"
+    key = "bastion.tfstate"
+  }
+}
+
 module "bastion" {
   source          = "./modules/bastion"
-  region          = "${var.region}"
-  name            = "${var.name}"
-  vpc_id          = "${var.vpc_id}"
-  vpc_cidr        = "${var.vpc_cidr}"
-  key_name        = "${var.key_name}"
-  public_key_path = "${var.public_key_path}"
-  base_domain     = "${var.base_domain}"
+  region          = "ap-northeast-2"
+  name            = "demo"
+  vpc_cidr        = "10.99.0.0/16"
+  key_name        = "nalbam-seoul"
+  base_domain     = "nalbam.com"
+}
+
+output "domain" {
+  value = "${module.bastion.domain}"
+}
+
+output "public_ip" {
+  value = "${module.bastion.public_ip}"
 }
