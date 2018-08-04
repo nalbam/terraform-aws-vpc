@@ -20,10 +20,10 @@ resource "aws_iam_role" "bastion" {
 EOF
 }
 
-// Poweruser
-resource "aws_iam_role_policy_attachment" "poweruser" {
+// AdministratorAccess
+resource "aws_iam_role_policy_attachment" "bastion" {
   role       = "${aws_iam_role.bastion.name}"
-  policy_arn = "arn:aws:iam::aws:policy/PowerUserAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
 // Create a instance profile for the role.
