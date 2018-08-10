@@ -33,6 +33,6 @@ resource "aws_eip" "bastion" {
   vpc = true
 
   tags = {
-    Name = "${var.name} bastion"
+    Name = "${var.name}-bastion"
   }
 }
