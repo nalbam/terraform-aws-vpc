@@ -6,7 +6,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    region = "${var.region}"
+    region = "ap-northeast-2"
     bucket = "terraform-nalbam-seoul"
     key = "bastion.tfstate"
   }
