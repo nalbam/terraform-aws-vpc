@@ -26,10 +26,6 @@ variable "public_key_path" {
   default = ""
 }
 
-variable "enable_eip" {
-  default = false
-}
-
 variable "base_domain" {
   description = "Base domain of the bastion, e.g: nalbam.com"
   default = ""

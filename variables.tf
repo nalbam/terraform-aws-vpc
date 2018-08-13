@@ -18,10 +18,6 @@ variable "key_name" {
   default = "nalbam-seoul"
 }
 
-variable "enable_eip" {
-  default = false
-}
-
 variable "base_domain" {
   default = "nalbam.com"
 }
