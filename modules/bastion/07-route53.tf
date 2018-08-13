@@ -10,6 +10,6 @@ resource "aws_route53_record" "bastion" {
   type    = "A"
   ttl     = 300
   records = [
-    "${aws_eip.bastion.public_ip}"
+    "${aws_instance.bastion.public_ip}"
   ]
 }
