@@ -19,7 +19,7 @@ variable "key_name" {
 }
 
 variable "enable_eip" {
-  default = true
+  default = false
 }
 
 variable "base_domain" {
