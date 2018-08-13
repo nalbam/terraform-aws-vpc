@@ -30,8 +30,9 @@ resource "aws_instance" "bastion" {
 }
 
 resource "aws_eip" "bastion" {
+  count    = "${var.enable_eip ? 1 : 0}"
   instance = "${aws_instance.bastion.id}"
-  vpc = true
+  vpc      = true
 
   tags = {
     Name = "${var.name}-bastion"

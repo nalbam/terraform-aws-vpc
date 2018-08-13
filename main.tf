@@ -16,8 +16,10 @@ module "bastion" {
   source      = "./modules/bastion"
   region      = "${var.region}"
   name        = "${var.name}"
+  vpc_id      = "${var.vpc_id}"
   vpc_cidr    = "${var.vpc_cidr}"
   key_name    = "${var.key_name}"
+  enable_eip  = "${var.enable_eip}"
   base_domain = "${var.base_domain}"
 }
 
