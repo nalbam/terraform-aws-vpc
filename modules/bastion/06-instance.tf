@@ -10,7 +10,7 @@ resource "aws_key_pair" "bastion" {
 
 resource "aws_instance" "bastion" {
   ami                     = "${data.aws_ami.default.id}"
-  instance_type           = "t2.micro"
+  instance_type           = "${var.type}"
   subnet_id               = "${element(aws_subnet.public.*.id, 0)}"
   iam_instance_profile    = "${aws_iam_instance_profile.bastion.id}"
   user_data               = "${data.template_file.setup.rendered}"

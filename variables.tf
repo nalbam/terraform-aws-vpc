@@ -6,6 +6,10 @@ variable "name" {
   default = "demo"
 }
 
+variable type {
+  default = "t2.nano"
+}
+
 variable "vpc_id" {
   default = ""
 }

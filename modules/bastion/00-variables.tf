@@ -6,6 +6,11 @@ variable "name" {
   description = "Name of the cluster, e.g: demo"
 }
 
+variable "type" {
+  description = "Type of the instance, e.g: t2.micro"
+  default = "t2.micro"
+}
+
 variable "vpc_id" {
   description = "The VPC ID."
   default = ""
