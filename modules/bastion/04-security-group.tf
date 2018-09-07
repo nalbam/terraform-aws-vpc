@@ -1,5 +1,5 @@
 resource "aws_security_group" "vpc" {
-  name        = "${var.name}-vpc"
+  name        = "${var.name}-bastion-vpc"
   description = "Default security group that allows all instances in the VPC to talk to each other over any port and protocol."
   vpc_id      = "${data.aws_vpc.main.id}"
 
@@ -18,12 +18,12 @@ resource "aws_security_group" "vpc" {
   }
 
   tags = {
-    Name = "${var.name} internal vpc"
+    Name = "${var.name}-bastion-vpc"
   }
 }
 
-resource "aws_security_group" "public-egress" {
-  name        = "${var.name}-public-egress"
+resource "aws_security_group" "egress" {
+  name        = "${var.name}-bastion-egress"
   description = "Security group that allows egress to the internet for instances over HTTP and HTTPS."
   vpc_id      = "${data.aws_vpc.main.id}"
 
@@ -36,13 +36,13 @@ resource "aws_security_group" "public-egress" {
   }
 
   tags = {
-    Name = "${var.name} public egress"
+    Name = "${var.name}-bastion-egress"
   }
 }
 
 resource "aws_security_group" "ssh" {
-  name        = "${var.name}-ssh"
-  description = "Security group that allows public ingress over SSH."
+  name        = "${var.name}-bastion-ssh"
+  description = "Security group that allows ingress over SSH."
   vpc_id      = "${data.aws_vpc.main.id}"
 
   // SSH
@@ -54,6 +54,6 @@ resource "aws_security_group" "ssh" {
   }
 
   tags = {
-    Name = "${var.name} ssh access"
+    Name = "${var.name}-bastion-ssh"
   }
 }
