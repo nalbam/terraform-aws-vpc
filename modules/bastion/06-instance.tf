@@ -14,7 +14,7 @@ resource "aws_instance" "bastion" {
   subnet_id               = "${element(aws_subnet.public.*.id, 0)}"
   iam_instance_profile    = "${aws_iam_instance_profile.bastion.id}"
   user_data               = "${data.template_file.setup.rendered}"
-  disable_api_termination = true
+  # disable_api_termination = true
 
   vpc_security_group_ids = [
     "${aws_security_group.vpc.id}",
