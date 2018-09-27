@@ -10,6 +10,7 @@ terraform {
     bucket = "terraform-nalbam-seoul"
     key = "bastion.tfstate"
   }
+  required_version = "> 0.11.0"
 }
 
 module "bastion" {
