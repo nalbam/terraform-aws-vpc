@@ -11,7 +11,7 @@ resource "aws_key_pair" "bastion" {
 resource "aws_instance" "bastion" {
   ami                     = "${data.aws_ami.default.id}"
   instance_type           = "${var.type}"
-  subnet_id               = "${element(aws_subnet.public.*.id, 0)}"
+  subnet_id               = "${element(aws_subnet.bastion.*.id, 0)}"
   iam_instance_profile    = "${aws_iam_instance_profile.bastion.id}"
   user_data               = "${data.template_file.setup.rendered}"
   # disable_api_termination = true
@@ -19,7 +19,7 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids = [
     "${aws_security_group.vpc.id}",
     "${aws_security_group.ssh.id}",
-    "${aws_security_group.public-egress.id}",
+    "${aws_security_group.egress.id}",
   ]
 
   key_name = "${var.key_name}"

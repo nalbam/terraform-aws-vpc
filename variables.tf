@@ -1,4 +1,4 @@
-variable region {
+variable "region" {
   default = "ap-northeast-2"
 }
 
@@ -6,7 +6,7 @@ variable "name" {
   default = "demo"
 }
 
-variable type {
+variable "type" {
   default = "t2.nano"
 }
 
