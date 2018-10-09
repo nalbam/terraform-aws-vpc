@@ -7,7 +7,7 @@ variable "name" {
 }
 
 variable "type" {
-  default = "t2.nano"
+  default = "t2.micro"
 }
 
 variable "vpc_id" {
