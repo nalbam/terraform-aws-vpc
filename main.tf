@@ -15,11 +15,20 @@ terraform {
 
 module "bastion" {
   source      = "./modules/bastion"
+
   region      = "${var.region}"
+  city        = "${var.city}"
+  stage       = "${var.stage}"
   name        = "${var.name}"
+  suffix      = "${var.suffix}"
+
+  type        = "${var.type}"
+
   vpc_id      = "${var.vpc_id}"
   vpc_cidr    = "${var.vpc_cidr}"
+
   key_name    = "${var.key_name}"
+
   base_domain = "${var.base_domain}"
 }
 

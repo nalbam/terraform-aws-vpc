@@ -2,8 +2,20 @@ variable "region" {
   description = "The region to deploy the cluster in, e.g: us-east-1"
 }
 
+variable "city" {
+  description = "City Name of the cluster, e.g: SEOUL"
+}
+
+variable "stage" {
+  description = "Stage Name of the cluster, e.g: DEV"
+}
+
 variable "name" {
-  description = "Name of the cluster, e.g: demo"
+  description = "Name of the cluster, e.g: DEMO"
+}
+
+variable "suffix" {
+  description = "Name of the cluster, e.g: BASTION"
 }
 
 variable "type" {
@@ -23,7 +35,7 @@ variable "vpc_cidr" {
 
 variable "key_name" {
   description = "The name of the key to user for ssh access, e.g: demo"
-  default = "demo"
+  default = ""
 }
 
 variable "public_key_path" {
@@ -32,7 +44,7 @@ variable "public_key_path" {
 }
 
 variable "base_domain" {
-  description = "Base domain of the bastion, e.g: nalbam.com"
+  description = "Base domain, e.g: nalbam.com"
   default = ""
 }
 
