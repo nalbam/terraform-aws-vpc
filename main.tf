@@ -32,6 +32,10 @@ module "bastion" {
   base_domain = "${var.base_domain}"
 }
 
+output "name" {
+  value = "${module.bastion.name}"
+}
+
 output "domain" {
   value = "${module.bastion.domain}"
 }
