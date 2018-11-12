@@ -19,7 +19,7 @@ resource "aws_eip" "private" {
 
 resource "aws_nat_gateway" "private" {
   count         = "${var.private_zones}"
-  subnet_id     = "${element(aws_subnet.private.*.id, count.index)}"
+  subnet_id     = "${element(aws_subnet.public.*.id, count.index)}"
   allocation_id = "${element(aws_eip.private.*.id, count.index)}"
 }
 

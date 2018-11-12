@@ -23,7 +23,7 @@ module "vpc" {
   name   = "DEMO"
 
   vpc_id        = ""
-  vpc_cidr      = "10.10.0.0/16"
+  cidr_block    = "10.10.0.0/16"
   public_zones  = "2"
   private_zones = "2"
 
