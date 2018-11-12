@@ -1,3 +1,5 @@
+// security group
+
 resource "aws_security_group" "vpc" {
   name        = "${var.city}-${var.stage}-${var.name}-VPC"
   description = "Default security group that allows all instances in the VPC."

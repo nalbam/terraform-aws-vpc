@@ -1,45 +1,58 @@
 # bastion
 
-provider "aws" {
-  region = "${var.region}"
-}
-
 terraform {
   backend "s3" {
     region = "ap-northeast-2"
     bucket = "terraform-nalbam-seoul"
-    key = "bastion.tfstate"
+    key    = "bastion.tfstate"
   }
+
   required_version = "> 0.11.0"
 }
 
-module "bastion" {
-  source      = "./modules/bastion"
+provider "aws" {
+  region = "ap-northeast-2"
+}
 
-  region      = "${var.region}"
-  city        = "${var.city}"
-  stage       = "${var.stage}"
-  name        = "${var.name}"
-  suffix      = "${var.suffix}"
+module "vpc" {
+  source = "./modules/vpc"
 
-  type        = "${var.type}"
+  region = "ap-northeast-2"
+  city   = "SEOUL"
+  stage  = "DEV"
+  name   = "DEMO"
 
-  vpc_id      = "${var.vpc_id}"
-  vpc_cidr    = "${var.vpc_cidr}"
+  vpc_id         = ""
+  vpc_cidr       = "10.10.0.0/16"
+  subnet_public  = "true"
+  subnet_private = "true"
 
-  key_name    = "${var.key_name}"
-
-  base_domain = "${var.base_domain}"
+  instance_type = "t2.nano"
+  key_path      = ""             # ~/.ssh/id_rsa.pub
+  key_name      = "nalbam-seoul"
+  base_domain   = "nalbam.com"
 }
 
 output "name" {
-  value = "${module.bastion.name}"
+  value = "${module.vpc.name}"
 }
 
-output "domain" {
-  value = "${module.bastion.domain}"
+output "vpc_id" {
+  value = "${module.vpc.vpc_id}"
 }
 
-output "public_ip" {
-  value = "${module.bastion.public_ip}"
+output "subnet_public_ids" {
+  value = "${module.vpc.subnet_public_ids}"
+}
+
+output "subnet_private_ids" {
+  value = "${module.vpc.subnet_private_ids}"
+}
+
+output "bastion_doamin" {
+  value = "${module.vpc.bastion_doamin}"
+}
+
+output "bastion_ip" {
+  value = "${module.vpc.bastion_ip}"
 }
