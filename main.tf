@@ -24,8 +24,8 @@ module "vpc" {
 
   vpc_id         = ""
   vpc_cidr       = "10.10.0.0/16"
-  subnet_public  = "true"
-  subnet_private = "true"
+  public_zones   = "2"
+  private_zones  = "2"
 
   instance_type = "t2.nano"
   key_path      = ""             # ~/.ssh/id_rsa.pub

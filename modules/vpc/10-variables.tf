@@ -5,7 +5,7 @@ variable "region" {
 }
 
 variable "city" {
-  description = "City Name of the cluster, e.g: SEOUL"
+  description = "City Name of the cluster, e.g: VIRGINIA"
 }
 
 variable "stage" {
@@ -26,14 +26,14 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "subnet_public" {
-  description = "Public subnet enabled."
-  default     = "true"
+variable "public_zones" {
+  description = "Availability of public subnet."
+  default     = "3"
 }
 
-variable "subnet_private" {
-  description = "Private subnet enabled."
-  default     = "true"
+variable "private_zones" {
+  description = "Availability of private subnet."
+  default     = "3"
 }
 
 variable "instance_type" {

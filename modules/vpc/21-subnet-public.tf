@@ -1,10 +1,8 @@
 // subnet public
 
 resource "aws_subnet" "public" {
-  count = "${var.subnet_public == "true" ? "${length(data.aws_availability_zones.azs.names)}" : 0}"
-
+  count = "${var.public_zones}"
   vpc_id = "${data.aws_vpc.default.id}"
-
   cidr_block        = "${cidrsubnet(data.aws_vpc.default.cidr_block, 8, 10 + count.index)}"
   availability_zone = "${data.aws_availability_zones.azs.names[count.index]}"
 
@@ -16,8 +14,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_internet_gateway" "public" {
-  count = "${var.subnet_public == "true" ? 1 : 0}"
-
+  count = "${var.public_zones > 0 ? 1 : 0}"
   vpc_id = "${data.aws_vpc.default.id}"
 
   tags = {
@@ -26,8 +23,7 @@ resource "aws_internet_gateway" "public" {
 }
 
 resource "aws_route_table" "public" {
-  count = "${var.subnet_public == "true" ? 1 : 0}"
-
+  count = "${var.public_zones > 0 ? 1 : 0}"
   vpc_id = "${data.aws_vpc.default.id}"
 
   route {
@@ -41,8 +37,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  count = "${var.subnet_public == "true" ? "${length(data.aws_availability_zones.azs.names)}" : 0}"
-
+  count = "${var.public_zones}"
   subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${aws_route_table.public.id}"
 }
