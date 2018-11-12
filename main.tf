@@ -22,10 +22,10 @@ module "vpc" {
   stage  = "DEV"
   name   = "DEMO"
 
-  vpc_id         = ""
-  vpc_cidr       = "10.10.0.0/16"
-  public_zones   = "2"
-  private_zones  = "2"
+  vpc_id        = ""
+  vpc_cidr      = "10.10.0.0/16"
+  public_zones  = "2"
+  private_zones = "2"
 
   instance_type = "t2.nano"
   key_path      = ""             # ~/.ssh/id_rsa.pub

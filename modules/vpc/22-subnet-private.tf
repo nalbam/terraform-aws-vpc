@@ -1,8 +1,8 @@
 # subnet private
 
 resource "aws_subnet" "private" {
-  count = "${var.private_zones}"
-  vpc_id = "${data.aws_vpc.default.id}"
+  count             = "${var.private_zones}"
+  vpc_id            = "${data.aws_vpc.default.id}"
   cidr_block        = "${cidrsubnet(data.aws_vpc.default.cidr_block, 8, 20 + count.index)}"
   availability_zone = "${data.aws_availability_zones.azs.names[count.index]}"
 
@@ -12,19 +12,19 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_eip" "private" {
-  count = "${var.private_zones}"
+  count      = "${var.private_zones}"
   vpc        = true
   depends_on = ["aws_internet_gateway.public"]
 }
 
 resource "aws_nat_gateway" "private" {
-  count = "${var.private_zones}"
+  count         = "${var.private_zones}"
   subnet_id     = "${element(aws_subnet.private.*.id, count.index)}"
   allocation_id = "${element(aws_eip.private.*.id, count.index)}"
 }
 
 resource "aws_route_table" "private" {
-  count = "${var.private_zones}"
+  count  = "${var.private_zones}"
   vpc_id = "${data.aws_vpc.default.id}"
 
   route {
@@ -38,7 +38,7 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_route_table_association" "private" {
-  count = "${var.private_zones}"
+  count          = "${var.private_zones}"
   subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
   route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
