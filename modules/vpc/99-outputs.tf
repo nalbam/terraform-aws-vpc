@@ -1,7 +1,7 @@
 // Output some useful variables for quick SSH access etc.
 
 output "name" {
-  value = "${var.city}-${var.stage}-${var.name}"
+  value = "${local.full_name}"
 }
 
 output "vpc_id" {

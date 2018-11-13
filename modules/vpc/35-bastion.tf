@@ -6,7 +6,7 @@ data "template_file" "bastion" {
 
 resource "aws_key_pair" "bastion" {
   count      = "${var.key_path != "" ? 1 : 0}"
-  key_name   = "${var.key_name != "" ? var.key_name : "${var.city}-${var.stage}-${var.name}-BASTION"}"
+  key_name   = "${var.key_name != "" ? var.key_name : "${local.full_name}-BASTION"}"
   public_key = "${file(var.key_path)}"
 }
 
@@ -25,7 +25,7 @@ resource "aws_instance" "bastion" {
     "${aws_security_group.egress.id}",
     "${aws_security_group.ingress.id}",
   ]
-  key_name = "${var.key_name != "" ? var.key_name : "${var.city}-${var.stage}-${var.name}-BASTION"}"
+  key_name = "${var.key_name != "" ? var.key_name : "${local.full_name}-BASTION"}"
   tags = {
     Name = "${var.city}-${upper(element(split("", data.aws_availability_zones.azs.names[0]), length(data.aws_availability_zones.azs.names[0])-1))}-${var.stage}-${var.name}-BASTION"
   }

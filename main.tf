@@ -4,28 +4,26 @@ terraform {
   backend "s3" {
     region = "ap-northeast-2"
     bucket = "terraform-nalbam-seoul"
-    key    = "bastion.tfstate"
+    key    = "vpc.tfstate"
   }
 
   required_version = "> 0.11.0"
 }
 
 provider "aws" {
-  region = "ap-northeast-2"
+  region = "${var.region}"
 }
 
 module "vpc" {
   source = "./modules/vpc"
 
-  region = "ap-northeast-2"
-  city   = "SEOUL"
-  stage  = "DEV"
-  name   = "DEMO"
+  region = "${var.region}"
+  city   = "${var.city}"
+  stage  = "${var.stage}"
+  name   = "${var.name}"
 
-  vpc_id        = ""
-  cidr_block    = "10.10.0.0/16"
-  public_zones  = "2"
-  private_zones = "2"
+  vpc_id     = ""
+  cidr_block = "10.10.0.0/16"
 
   instance_type = "t2.nano"
   key_path      = ""             # ~/.ssh/id_rsa.pub

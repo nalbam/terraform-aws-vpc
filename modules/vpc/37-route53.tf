@@ -8,7 +8,7 @@ data "aws_route53_zone" "default" {
 resource "aws_route53_record" "bastion" {
   count   = "${var.base_domain != "" ? "${var.instance_type != "" ? 1 : 0}" : 0}"
   zone_id = "${data.aws_route53_zone.default.zone_id}"
-  name    = "${var.city}-${var.stage}-${var.name}-BASTION.${data.aws_route53_zone.default.name}"
+  name    = "${local.lower_name}-bastion.${data.aws_route53_zone.default.name}"
   type    = "A"
   ttl     = 300
 

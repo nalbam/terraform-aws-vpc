@@ -26,16 +26,6 @@ variable "cidr_block" {
   default     = "10.0.0.0/16"
 }
 
-variable "public_zones" {
-  description = "Availability of public subnet."
-  default     = "3"
-}
-
-variable "private_zones" {
-  description = "Availability of private subnet."
-  default     = "3"
-}
-
 variable "instance_type" {
   description = "Type of the bastion instance, e.g: t2.micro"
   default     = "t2.micro"
