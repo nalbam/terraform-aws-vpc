@@ -1,4 +1,4 @@
-// bastion
+# bastion
 
 data "template_file" "bastion" {
   template = "${file("${path.module}/files/bastion.sh")}"

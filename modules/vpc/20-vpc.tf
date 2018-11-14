@@ -1,4 +1,4 @@
-// vpc
+# vpc
 
 resource "aws_vpc" "default" {
   count = "${var.vpc_id == "" ? 1 : 0}"

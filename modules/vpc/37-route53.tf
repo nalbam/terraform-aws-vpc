@@ -1,4 +1,4 @@
-// route53 for bastion
+# route53
 
 data "aws_route53_zone" "default" {
   count = "${var.base_domain != "" ? 1 : 0}"

@@ -1,4 +1,4 @@
-// security group
+# security group
 
 resource "aws_security_group" "vpc" {
   name        = "${var.city}-${var.stage}-${var.name}-VPC"

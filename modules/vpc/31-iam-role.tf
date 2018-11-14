@@ -1,4 +1,4 @@
-// instance profile for bastion
+# iam_role
 
 resource "aws_iam_role" "bastion" {
   name = "${local.full_name}-BASTION"
