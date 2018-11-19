@@ -1,7 +1,7 @@
 # iam_role
 
 resource "aws_iam_role" "bastion" {
-  name = "${local.full_name}-BASTION"
+  name = "${local.upper_name}-BASTION"
 
   assume_role_policy = <<EOF
 {
@@ -28,6 +28,6 @@ resource "aws_iam_role_policy_attachment" "bastion" {
 
 // Create a instance profile for the role.
 resource "aws_iam_instance_profile" "bastion" {
-  name = "${local.full_name}-BASTION"
+  name = "${local.upper_name}-BASTION"
   role = "${aws_iam_role.bastion.name}"
 }

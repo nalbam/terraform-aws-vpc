@@ -20,12 +20,12 @@ resource "aws_security_group" "vpc" {
   }
 
   tags = {
-    Name = "${local.full_name}-VPC"
+    Name = "${local.upper_name}-VPC"
   }
 }
 
 resource "aws_security_group" "egress" {
-  name        = "${local.full_name}-EGRESS"
+  name        = "${local.upper_name}-EGRESS"
   description = "Security group that allows egress."
   vpc_id      = "${data.aws_vpc.default.id}"
 
@@ -38,12 +38,12 @@ resource "aws_security_group" "egress" {
   }
 
   tags = {
-    Name = "${local.full_name}-EGRESS"
+    Name = "${local.upper_name}-EGRESS"
   }
 }
 
 resource "aws_security_group" "ingress" {
-  name        = "${local.full_name}-INGRESS"
+  name        = "${local.upper_name}-INGRESS"
   description = "Security group that allows ingress."
   vpc_id      = "${data.aws_vpc.default.id}"
 
@@ -56,6 +56,6 @@ resource "aws_security_group" "ingress" {
   }
 
   tags = {
-    Name = "${local.full_name}-INGRESS"
+    Name = "${local.upper_name}-INGRESS"
   }
 }

@@ -6,7 +6,7 @@ data "template_file" "bastion" {
 
 resource "aws_key_pair" "bastion" {
   count      = "${var.key_path != "" ? 1 : 0}"
-  key_name   = "${local.full_name}-BASTION"
+  key_name   = "${local.upper_name}-BASTION"
   public_key = "${file(var.key_path)}"
 }
 
@@ -20,7 +20,7 @@ resource "aws_instance" "bastion" {
 
   # disable_api_termination = true
 
-  key_name = "${var.key_path != "" ? "${local.full_name}-BASTION" : "${var.key_name}"}"
+  key_name = "${var.key_path != "" ? "${local.upper_name}-BASTION" : "${var.key_name}"}"
 
   vpc_security_group_ids = [
     "${aws_security_group.vpc.id}",
