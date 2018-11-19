@@ -25,7 +25,7 @@ resource "aws_instance" "bastion" {
     "${aws_security_group.egress.id}",
     "${aws_security_group.ingress.id}",
   ]
-  key_name = "${var.key_name != "" ? var.key_name : "${local.full_name}-BASTION"}"
+  key_name = "${var.key_path != "" ? "${aws_key_pair.bastion.0.name}" : "${var.key_name}"}"
   tags = {
     Name = "${var.city}-${upper(element(split("", data.aws_availability_zones.azs.names[0]), length(data.aws_availability_zones.azs.names[0])-1))}-${var.stage}-${var.name}-BASTION"
   }
