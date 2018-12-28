@@ -13,22 +13,13 @@ resource "aws_subnet" "public" {
   }
 }
 
-resource "aws_internet_gateway" "public" {
-  count  = "${length(data.aws_availability_zones.azs.names) > 0 ? 1 : 0}"
-  vpc_id = "${data.aws_vpc.default.id}"
-
-  tags = {
-    Name = "${local.upper_name}-PUBLIC"
-  }
-}
-
 resource "aws_route_table" "public" {
   count  = "${length(data.aws_availability_zones.azs.names) > 0 ? 1 : 0}"
   vpc_id = "${data.aws_vpc.default.id}"
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.public.id}"
+    gateway_id = "${data.aws_internet_gateway.default.id}"
   }
 
   tags = {

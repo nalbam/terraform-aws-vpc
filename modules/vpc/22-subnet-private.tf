@@ -14,7 +14,11 @@ resource "aws_subnet" "private" {
 resource "aws_eip" "private" {
   count      = "${length(data.aws_availability_zones.azs.names) > 3 ? 3 : length(data.aws_availability_zones.azs.names)}"
   vpc        = true
-  depends_on = ["aws_internet_gateway.public"]
+  depends_on = ["aws_route_table.public"]
+
+  tags = {
+    Name = "${var.city}-${upper(element(split("", data.aws_availability_zones.azs.names[count.index]), length(data.aws_availability_zones.azs.names[count.index])-1))}-${var.stage}-${var.name}-PRIVATE"
+  }
 }
 
 resource "aws_nat_gateway" "private" {

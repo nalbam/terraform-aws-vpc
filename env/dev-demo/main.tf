@@ -11,24 +11,25 @@ terraform {
 }
 
 provider "aws" {
-  region = "${var.region}"
+  region = "ap-northeast-2"
 }
 
 module "vpc" {
-  source = "./modules/vpc"
+  source = "../../modules/vpc"
 
-  region = "${var.region}"
-  city   = "${var.city}"
-  stage  = "${var.stage}"
-  name   = "${var.name}"
+  region = "ap-northeast-2"
+  city   = "SEOUL"
+  stage  = "DEV"
+  name   = "DEMO"
 
   vpc_id     = ""
   cidr_block = "10.10.0.0/16"
 
   instance_type = "t2.nano"
-  key_path      = ""             # ~/.ssh/id_rsa.pub
-  key_name      = "nalbam-seoul"
-  base_domain   = "nalbam.com"
+
+  key_name = "nalbam-seoul"
+
+  base_domain = "nalbam.com"
 }
 
 output "name" {
