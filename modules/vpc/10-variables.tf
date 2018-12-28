@@ -28,7 +28,7 @@ variable "cidr_block" {
 
 variable "instance_type" {
   description = "Type of the bastion instance, e.g: t2.micro"
-  default     = "t2.micro"
+  default     = ""
 }
 
 variable "key_name" {

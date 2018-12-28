@@ -6,7 +6,7 @@ data "aws_route53_zone" "default" {
 }
 
 resource "aws_route53_record" "bastion" {
-  count   = "${var.base_domain != "" ? "${var.instance_type != "" ? 1 : 0}" : 0}"
+  count   = "${element(concat(aws_eip.bastion.*.public_ip, list("")), 0) != "" ? 1 : 0}"
   zone_id = "${data.aws_route53_zone.default.zone_id}"
   name    = "${local.lower_name}-bastion.${data.aws_route53_zone.default.name}"
   type    = "A"

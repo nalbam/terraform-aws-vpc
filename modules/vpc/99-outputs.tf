@@ -5,7 +5,7 @@ output "name" {
 }
 
 output "vpc_id" {
-  value = "${aws_vpc.default.*.id}"
+  value = "${data.aws_vpc.default.id}"
 }
 
 output "subnet_public_ids" {
@@ -17,9 +17,9 @@ output "subnet_private_ids" {
 }
 
 output "bastion_doamin" {
-  value = "${aws_route53_record.bastion.*.name}"
+  value = "${element(concat(aws_route53_record.bastion.*.name, list("")), 0)}"
 }
 
 output "bastion_ip" {
-  value = "${aws_eip.bastion.*.public_ip}"
+  value = "${element(concat(aws_eip.bastion.*.public_ip, list("")), 0)}"
 }
