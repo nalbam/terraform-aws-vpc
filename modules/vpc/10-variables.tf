@@ -26,6 +26,11 @@ variable "cidr_block" {
   default     = "10.0.0.0/16"
 }
 
+variable "topology" {
+  description = "The topology for the VPC, e.g: public"
+  default     = "public"
+}
+
 variable "instance_type" {
   description = "Type of the bastion instance, e.g: t2.micro"
   default     = ""

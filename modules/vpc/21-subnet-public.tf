@@ -1,7 +1,7 @@
 # subnet public
 
 resource "aws_subnet" "public" {
-  count             = "${length(data.aws_availability_zones.azs.names) > 3 ? 3 : length(data.aws_availability_zones.azs.names)}"
+  count             = "${local.az_count}"
   vpc_id            = "${data.aws_vpc.default.id}"
   cidr_block        = "${cidrsubnet(data.aws_vpc.default.cidr_block, 8, 10 + count.index)}"
   availability_zone = "${data.aws_availability_zones.azs.names[count.index]}"
@@ -28,7 +28,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  count          = "${length(data.aws_availability_zones.azs.names) > 3 ? 3 : length(data.aws_availability_zones.azs.names)}"
+  count          = "${local.az_count}"
   subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
   route_table_id = "${aws_route_table.public.id}"
 }

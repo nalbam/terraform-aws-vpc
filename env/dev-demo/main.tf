@@ -24,8 +24,9 @@ module "vpc" {
 
   vpc_id     = ""
   cidr_block = "10.10.0.0/16"
+  topology   = "public"
 
-  instance_type = ""
+  instance_type = "t2.nano"
 
   key_name = "nalbam-seoul"
 
