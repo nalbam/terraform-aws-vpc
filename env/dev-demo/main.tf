@@ -6,8 +6,6 @@ terraform {
     bucket = "terraform-nalbam-seoul"
     key    = "vpc.tfstate"
   }
-
-  required_version = "> 0.11.0"
 }
 
 provider "aws" {
