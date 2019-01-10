@@ -16,6 +16,10 @@ variable "name" {
   description = "Name of the cluster, e.g: DEMO"
 }
 
+variable "suffix" {
+  description = "Name of the cluster, e.g: BASTION"
+}
+
 variable "vpc_id" {
   description = "The VPC ID."
   default     = ""

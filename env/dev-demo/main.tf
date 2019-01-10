@@ -19,16 +19,21 @@ module "vpc" {
   city   = "SEOUL"
   stage  = "DEV"
   name   = "DEMO"
+  suffix = "BASTION"
 
-  vpc_id     = ""
-  cidr_block = "10.10.0.0/16"
-  topology   = "public"
+  vpc_id   = ""
+  vpc_cidr = "10.10.0.0/16"
+  topology = "public"
 
   instance_type = "t2.nano"
 
   key_name = "nalbam-seoul"
 
   base_domain = "nalbam.com"
+
+  allow_ip_address = [
+    "58.151.93.9/32", # 강남 echo "$(curl -sL icanhazip.com)/32"
+  ]
 }
 
 output "name" {
