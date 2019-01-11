@@ -25,7 +25,7 @@ variable "vpc_id" {
   default     = ""
 }
 
-variable "cidr_block" {
+variable "vpc_cidr" {
   description = "The CIDR block for the VPC, e.g: 10.0.0.0/16"
   default     = "10.0.0.0/16"
 }
@@ -53,6 +53,12 @@ variable "key_path" {
 variable "base_domain" {
   description = "Base domain for bastion, e.g: nalbam.com"
   default     = ""
+}
+
+variable "allow_ip_address" {
+  description = "List of IP Address to permit access to the Elasticsearch domain"
+  type        = "list"
+  default     = ["*"]
 }
 
 data "aws_availability_zones" "azs" {}

@@ -23,12 +23,11 @@ module "vpc" {
 
   vpc_id   = ""
   vpc_cidr = "10.10.0.0/16"
-  topology = "public"
+  topology = "private"
 
   instance_type = "t2.nano"
 
-  key_name = "nalbam-seoul"
-
+  key_name    = "nalbam-seoul"
   base_domain = "nalbam.com"
 
   allow_ip_address = [
