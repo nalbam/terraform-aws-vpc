@@ -26,6 +26,11 @@ variable "topology" {
   default     = "public"
 }
 
+variable "newbits" {
+  description = "The newbits for the cidrsubnet, e.g: 4"
+  default     = "4"
+}
+
 variable "instance_type" {
   description = "Type of the bastion instance, e.g: t2.micro"
   default     = ""

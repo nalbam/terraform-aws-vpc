@@ -22,6 +22,7 @@ module "vpc" {
 
   cidr_block = "10.10.0.0/16"
   topology   = "private"
+  newbits    = "3"
 
   instance_type = "t2.nano"
 

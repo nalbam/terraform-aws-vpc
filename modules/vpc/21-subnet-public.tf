@@ -3,7 +3,7 @@
 resource "aws_subnet" "public" {
   count             = "${local.az_count}"
   vpc_id            = "${aws_vpc.default.id}"
-  cidr_block        = "${cidrsubnet(aws_vpc.default.cidr_block, 4, count.index)}"
+  cidr_block        = "${cidrsubnet(aws_vpc.default.cidr_block, var.newbits, count.index)}"
   availability_zone = "${data.aws_availability_zones.azs.names[count.index]}"
 
   map_public_ip_on_launch = true
