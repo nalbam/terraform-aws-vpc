@@ -5,7 +5,7 @@ output "name" {
 }
 
 output "vpc_id" {
-  value = "${data.aws_vpc.default.id}"
+  value = "${aws_vpc.default.id}"
 }
 
 output "subnet_public_ids" {

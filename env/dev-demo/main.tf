@@ -19,11 +19,10 @@ module "vpc" {
   city   = "SEOUL"
   stage  = "DEV"
   name   = "DEMO"
-  suffix = "BASTION"
+  suffix = "VPC"
 
-  vpc_id   = ""
-  vpc_cidr = "10.10.0.0/16"
-  topology = "private"
+  cidr_block = "10.10.0.0/16"
+  topology   = "private"
 
   instance_type = "t2.nano"
 

@@ -2,8 +2,8 @@
 
 resource "aws_subnet" "private" {
   count             = "${var.topology == "private" ? local.az_count : 0}"
-  vpc_id            = "${data.aws_vpc.default.id}"
-  cidr_block        = "${cidrsubnet(data.aws_vpc.default.cidr_block, 4, (count.index + local.az_count))}"
+  vpc_id            = "${aws_vpc.default.id}"
+  cidr_block        = "${cidrsubnet(aws_vpc.default.cidr_block, 4, (count.index + local.az_count))}"
   availability_zone = "${data.aws_availability_zones.azs.names[count.index]}"
 
   tags = {
@@ -29,7 +29,7 @@ resource "aws_nat_gateway" "private" {
 
 resource "aws_route_table" "private" {
   count  = "${var.topology == "private" ? local.az_count : 0}"
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = "${aws_vpc.default.id}"
 
   route {
     cidr_block = "0.0.0.0/0"

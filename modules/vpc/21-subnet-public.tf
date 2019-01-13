@@ -2,8 +2,8 @@
 
 resource "aws_subnet" "public" {
   count             = "${local.az_count}"
-  vpc_id            = "${data.aws_vpc.default.id}"
-  cidr_block        = "${cidrsubnet(data.aws_vpc.default.cidr_block, 4, count.index)}"
+  vpc_id            = "${aws_vpc.default.id}"
+  cidr_block        = "${cidrsubnet(aws_vpc.default.cidr_block, 4, count.index)}"
   availability_zone = "${data.aws_availability_zones.azs.names[count.index]}"
 
   map_public_ip_on_launch = true
@@ -15,11 +15,11 @@ resource "aws_subnet" "public" {
 
 resource "aws_route_table" "public" {
   count  = "${length(data.aws_availability_zones.azs.names) > 0 ? 1 : 0}"
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = "${aws_vpc.default.id}"
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${data.aws_internet_gateway.default.id}"
+    gateway_id = "${aws_internet_gateway.default.id}"
   }
 
   tags = {
