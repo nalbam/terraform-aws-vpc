@@ -19,7 +19,6 @@ module "vpc" {
   city   = "SEOUL"
   stage  = "DEV"
   name   = "DEMO"
-  suffix = "VPC"
 
   cidr_block = "10.10.0.0/16"
   topology   = "private"
