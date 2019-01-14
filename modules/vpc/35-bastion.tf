@@ -2,6 +2,10 @@
 
 data "template_file" "bastion" {
   template = "${file("${path.module}/files/bastion.sh")}"
+
+  vars {
+    HOSTNAME = "${local.lower_name}"
+  }
 }
 
 resource "aws_key_pair" "bastion" {
@@ -21,13 +25,11 @@ resource "aws_instance" "bastion" {
   # disable_api_termination = true
 
   key_name = "${var.key_path != "" ? "${local.upper_name}-BASTION" : "${var.key_name}"}"
-
   vpc_security_group_ids = [
     "${aws_security_group.vpc.id}",
     "${aws_security_group.egress.id}",
     "${aws_security_group.ingress.id}",
   ]
-
   tags = {
     Name = "${var.city}-${upper(element(split("", data.aws_availability_zones.azs.names[0]), length(data.aws_availability_zones.azs.names[0])-1))}-${var.stage}-${var.name}-BASTION"
   }
