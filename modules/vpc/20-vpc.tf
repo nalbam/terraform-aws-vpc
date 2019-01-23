@@ -1,20 +1,34 @@
 # vpc
 
-resource "aws_vpc" "default" {
-  cidr_block = "${var.cidr_block}"
+resource "aws_vpc" "this" {
+  count = "${var.vpc_id == "" ? 1 : 0}"
+
+  cidr_block = "${var.vpc_cidr}"
 
   enable_dns_hostnames = true
 
   tags = {
-    Name = "${local.upper_name}"
+    Name = "${local.full_name}"
   }
 }
 
-// Create an Internet Gateway.
-resource "aws_internet_gateway" "default" {
-  vpc_id = "${aws_vpc.default.id}"
+data "aws_vpc" "this" {
+  id = "${var.vpc_id == "" ? aws_vpc.this.id : var.vpc_id}"
+}
+
+resource "aws_internet_gateway" "this" {
+  count = "${var.vpc_id == "" ? 1 : 0}"
+
+  vpc_id = "${aws_vpc.this.id}"
 
   tags = {
-    Name = "${local.upper_name}"
+    Name = "${local.full_name}"
+  }
+}
+
+data "aws_internet_gateway" "this" {
+  filter {
+    name   = "attachment.vpc-id"
+    values = ["${data.aws_vpc.this.id}"]
   }
 }

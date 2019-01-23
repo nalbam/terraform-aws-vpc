@@ -1,25 +1,29 @@
 # output
 
-output "name" {
-  value = "${local.full_name}"
-}
-
 output "vpc_id" {
-  value = "${aws_vpc.default.id}"
+  value = "${data.aws_vpc.this.id}"
 }
 
-output "subnet_public_ids" {
+output "vpc_cidr" {
+  value = "${data.aws_vpc.this.cidr_block}"
+}
+
+output "public_subnet_ids" {
   value = "${aws_subnet.public.*.id}"
 }
 
-output "subnet_private_ids" {
+output "public_subnet_cidr" {
+  value = "${aws_subnet.public.*.cidr_block}"
+}
+
+output "private_subnet_ids" {
   value = "${aws_subnet.private.*.id}"
 }
 
-output "bastion_doamin" {
-  value = "${element(concat(aws_route53_record.bastion.*.name, list("")), 0)}"
+output "private_subnet_cidr" {
+  value = "${aws_subnet.private.*.cidr_block}"
 }
 
-output "bastion_ip" {
-  value = "${element(concat(aws_eip.bastion.*.public_ip, list("")), 0)}"
+output "nat_ip" {
+  value = "${aws_eip.private.*.public_ip}"
 }
