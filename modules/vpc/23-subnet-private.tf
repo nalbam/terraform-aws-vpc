@@ -8,9 +8,7 @@ resource "aws_subnet" "private" {
 
   availability_zone = "${local.az_names[count.index]}"
 
-  tags = {
-    Name = "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"
-  }
+  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"), var.tags)}"
 }
 
 resource "aws_eip" "private" {
@@ -20,9 +18,9 @@ resource "aws_eip" "private" {
   depends_on = ["aws_route_table.public"]
 
   tags = "${
-    map(
-     "Name", var.single_nat_gateway ? "${local.full_name}-PRIVATE" : "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"
-    )
+    merge(
+      map("Name", var.single_nat_gateway ? "${local.full_name}-PRIVATE" : "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"),
+      var.tags)
   }"
 }
 
@@ -31,6 +29,12 @@ resource "aws_nat_gateway" "private" {
 
   allocation_id = "${element(aws_eip.private.*.id, count.index)}"
   subnet_id     = "${element(aws_subnet.public.*.id, count.index)}"
+
+  tags = "${
+    merge(
+      map("Name", var.single_nat_gateway ? "${local.full_name}-PRIVATE" : "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"),
+      var.tags)
+  }"
 }
 
 resource "aws_route_table" "private" {
@@ -44,9 +48,9 @@ resource "aws_route_table" "private" {
   }
 
   tags = "${
-    map(
-     "Name", var.single_nat_gateway ? "${local.full_name}-PRIVATE" : "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"
-    )
+    merge(
+      map("Name", var.single_nat_gateway ? "${local.full_name}-PRIVATE" : "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"),
+      var.tags)
   }"
 }
 

@@ -8,9 +8,7 @@ resource "aws_subnet" "public" {
 
   availability_zone = "${local.az_names[count.index]}"
 
-  tags = {
-    Name = "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PUBLIC"
-  }
+  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PUBLIC"), var.tags)}"
 }
 
 resource "aws_route_table" "public" {
@@ -23,9 +21,7 @@ resource "aws_route_table" "public" {
     gateway_id = "${var.vpc_id == "" ? aws_internet_gateway.this.*.id[0] : data.aws_internet_gateway.this.id}"
   }
 
-  tags = {
-    Name = "${local.full_name}-PUBLIC"
-  }
+  tags = "${merge(map("Name", "${local.full_name}-PUBLIC"), var.tags)}"
 }
 
 resource "aws_route_table_association" "public" {

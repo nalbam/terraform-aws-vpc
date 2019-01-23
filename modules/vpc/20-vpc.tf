@@ -7,9 +7,7 @@ resource "aws_vpc" "this" {
 
   enable_dns_hostnames = true
 
-  tags = {
-    Name = "${local.full_name}"
-  }
+  tags = "${merge(map("Name", "${local.full_name}"), var.tags)}"
 }
 
 data "aws_vpc" "this" {
@@ -21,9 +19,7 @@ resource "aws_internet_gateway" "this" {
 
   vpc_id = "${aws_vpc.this.id}"
 
-  tags = {
-    Name = "${local.full_name}"
-  }
+  tags = "${merge(map("Name", "${local.full_name}"), var.tags)}"
 }
 
 data "aws_internet_gateway" "this" {

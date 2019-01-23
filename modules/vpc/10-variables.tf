@@ -53,3 +53,8 @@ variable "private_subnet_netnum" {
 variable "single_nat_gateway" {
   default = false
 }
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  default     = {}
+}

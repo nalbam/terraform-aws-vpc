@@ -32,6 +32,13 @@ module "vpc" {
   private_subnet_netnum  = 1
 
   single_nat_gateway = true
+
+  tags = "${
+    map(
+     "KubernetesCluster", "seoul-dev-demo-eks",
+     "kubernetes.io/cluster/seoul-dev-demo-eks", "shared"
+    )
+  }"
 }
 
 output "vpc_id" {
