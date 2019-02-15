@@ -11,13 +11,13 @@ resource "aws_vpc" "this" {
 }
 
 data "aws_vpc" "this" {
-  id = "${var.vpc_id == "" ? aws_vpc.this.id : var.vpc_id}"
+  id = "${var.vpc_id == "" ? element(concat(aws_vpc.this.*.id, list("")), 0) : var.vpc_id}"
 }
 
 resource "aws_internet_gateway" "this" {
   count = "${var.vpc_id == "" ? 1 : 0}"
 
-  vpc_id = "${aws_vpc.this.id}"
+  vpc_id = "${var.vpc_id == "" ? element(concat(aws_vpc.this.*.id, list("")), 0) : var.vpc_id}"
 
   tags = "${merge(map("Name", "${local.full_name}"), var.tags)}"
 }
@@ -25,6 +25,6 @@ resource "aws_internet_gateway" "this" {
 data "aws_internet_gateway" "this" {
   filter {
     name   = "attachment.vpc-id"
-    values = ["${data.aws_vpc.this.id}"]
+    values = ["${var.vpc_id == "" ? element(concat(aws_vpc.this.*.id, list("")), 0) : var.vpc_id}"]
   }
 }

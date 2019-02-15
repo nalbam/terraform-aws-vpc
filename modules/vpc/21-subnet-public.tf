@@ -18,7 +18,7 @@ resource "aws_route_table" "public" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${var.vpc_id == "" ? aws_internet_gateway.this.*.id[0] : data.aws_internet_gateway.this.id}"
+    gateway_id = "${data.aws_internet_gateway.this.id}"
   }
 
   tags = "${merge(map("Name", "${local.full_name}-PUBLIC"), var.tags)}"
