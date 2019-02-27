@@ -24,18 +24,17 @@ module "vpc" {
   vpc_cidr = "10.10.0.0/16"
 
   public_subnet_enable  = true
-  public_subnet_newbits = 4    // 0.0.0.0/20 16 C 4096 255.255.240.000
-  public_subnet_netnum  = 0
+  public_subnet_newbits = 8    # 8 0.0.0.0/24 1 C 256 255.255.255.000
+  public_subnet_netnum  = 1
 
   private_subnet_enable  = true
-  private_subnet_newbits = 2    // 0.0.0.0/18 64 C 16384 255.255.192.000
-  private_subnet_netnum  = 1
+  private_subnet_newbits = 8    # 8 0.0.0.0/24 1 C 256 255.255.255.000
+  private_subnet_netnum  = 3
 
   single_nat_gateway = true
 
   tags = "${
     map(
-     "KubernetesCluster", "seoul-dev-demo-eks",
      "kubernetes.io/cluster/seoul-dev-demo-eks", "shared"
     )
   }"
