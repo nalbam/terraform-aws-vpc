@@ -17,7 +17,7 @@ data "aws_vpc" "this" {
 resource "aws_internet_gateway" "this" {
   count = "${var.vpc_id == "" ? 1 : 0}"
 
-  vpc_id = "${var.vpc_id == "" ? element(concat(aws_vpc.this.*.id, list("")), 0) : var.vpc_id}"
+  vpc_id = "${element(concat(aws_vpc.this.*.id, list("")), 0)}"
 
   tags = "${merge(map("Name", "${local.full_name}"), var.tags)}"
 }
