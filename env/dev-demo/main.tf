@@ -27,15 +27,16 @@ module "vpc" {
   public_subnet_newbits = 8    # 8 0.0.0.0/24 1 C 256 255.255.255.000
   public_subnet_netnum  = 1
 
-  private_subnet_enable  = true
-  private_subnet_newbits = 8    # 8 0.0.0.0/24 1 C 256 255.255.255.000
+  private_subnet_enable  = false
+  private_subnet_newbits = 8     # 8 0.0.0.0/24 1 C 256 255.255.255.000
   private_subnet_netnum  = 3
 
   single_nat_gateway = true
 
   tags = "${
     map(
-     "kubernetes.io/cluster/seoul-dev-demo-eks", "shared"
+     "kubernetes.io/cluster/seoul-dev-demo-eks", "shared",
+     "kubernetes.io/cluster/seoul-dev-spot-eks", "shared",
     )
   }"
 }
