@@ -35,8 +35,8 @@ module "vpc" {
 
   tags = "${
     map(
-     "kubernetes.io/cluster/seoul-dev-demo-eks", "shared",
-     "kubernetes.io/cluster/seoul-dev-spot-eks", "shared",
+      "kubernetes.io/cluster/seoul-dev-demo-eks", "shared",
+      "kubernetes.io/cluster/seoul-dev-spot-eks", "shared",
     )
   }"
 }
