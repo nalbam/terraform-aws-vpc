@@ -30,6 +30,10 @@ variable "public_subnet_enable" {
   default = true
 }
 
+variable "public_subnet_cidrs" {
+  default = []
+}
+
 variable "public_subnet_newbits" {
   default = 4
 }
@@ -40,6 +44,10 @@ variable "public_subnet_netnum" {
 
 variable "private_subnet_enable" {
   default = true
+}
+
+variable "private_subnet_cidrs" {
+  default = []
 }
 
 variable "private_subnet_newbits" {
