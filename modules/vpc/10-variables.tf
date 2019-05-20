@@ -31,6 +31,7 @@ variable "public_subnet_enable" {
 }
 
 variable "public_subnet_cidrs" {
+  type    = "list"
   default = []
 }
 
@@ -47,6 +48,7 @@ variable "private_subnet_enable" {
 }
 
 variable "private_subnet_cidrs" {
+  type    = "list"
   default = []
 }
 

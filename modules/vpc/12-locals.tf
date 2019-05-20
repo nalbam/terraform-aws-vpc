@@ -11,7 +11,7 @@ locals {
 
   az_names = "${data.aws_availability_zones.azs.names}"
 
-  az_count = "${length(data.aws_availability_zones.azs.names) > 3 ? 3 : length(data.aws_availability_zones.azs.names)}"
+  az_count = "${length(local.az_names) > 3 ? 3 : length(local.az_names)}"
 
-  az_length = "${length(data.aws_availability_zones.azs.names[0])}"
+  az_length = "${length(local.az_names[0])}"
 }
