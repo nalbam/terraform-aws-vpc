@@ -10,7 +10,7 @@ resource "aws_subnet" "private" {
     count.index + var.private_subnet_netnum,
   )
 
-  availability_zone = local.az_names[count.index]
+  availability_zone = length(var.private_subnet_zones) > 0 ? var.private_subnet_zones[count.index] : local.az_names[count.index]
 
   tags = merge(
     {
@@ -83,4 +83,3 @@ resource "aws_route_table_association" "private" {
   )
   subnet_id = element(aws_subnet.private.*.id, count.index)
 }
-

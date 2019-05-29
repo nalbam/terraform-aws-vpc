@@ -10,7 +10,7 @@ resource "aws_subnet" "public" {
     count.index + var.public_subnet_netnum,
   )
 
-  availability_zone = local.az_names[count.index]
+  availability_zone = length(var.public_subnet_zones) > 0 ? var.public_subnet_zones[count.index] : local.az_names[count.index]
 
   tags = merge(
     {
@@ -46,4 +46,3 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public[0].id
   subnet_id      = aws_subnet.public[count.index].id
 }
-
