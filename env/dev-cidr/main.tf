@@ -24,14 +24,14 @@ module "vpc" {
   vpc_cidr = "10.10.0.0/16"
 
   public_subnet_enable = true
-  public_subnet_cidrs  = [
+  public_subnet_cidrs = [
     "10.10.0.11/24",
     "10.10.0.15/24",
     "10.10.0.12/24",
   ]
 
   private_subnet_enable = true
-  private_subnet_cidrs  = [
+  private_subnet_cidrs = [
     "10.10.0.13/24",
     "10.10.0.16/24",
     "10.10.0.14/24",
@@ -39,38 +39,37 @@ module "vpc" {
 
   single_nat_gateway = true
 
-  tags = "${
-    map(
-      "kubernetes.io/cluster/seoul-dev-demo-eks", "shared",
-      "kubernetes.io/cluster/seoul-dev-spot-eks", "shared",
-    )
-  }"
+  tags = {
+    "kubernetes.io/cluster/seoul-dev-demo-eks" = "shared"
+    "kubernetes.io/cluster/seoul-dev-spot-eks" = "shared"
+  }
 }
 
 output "vpc_id" {
-  value = "${module.vpc.vpc_id}"
+  value = module.vpc.vpc_id
 }
 
 output "vpc_cidr" {
-  value = "${module.vpc.vpc_cidr}"
+  value = module.vpc.vpc_cidr
 }
 
 output "public_subnet_ids" {
-  value = "${module.vpc.public_subnet_ids}"
+  value = module.vpc.public_subnet_ids
 }
 
 output "public_subnet_cidr" {
-  value = "${module.vpc.public_subnet_cidr}"
+  value = module.vpc.public_subnet_cidr
 }
 
 output "private_subnet_ids" {
-  value = "${module.vpc.private_subnet_ids}"
+  value = module.vpc.private_subnet_ids
 }
 
 output "private_subnet_cidr" {
-  value = "${module.vpc.private_subnet_cidr}"
+  value = module.vpc.private_subnet_cidr
 }
 
 output "nat_ip" {
-  value = "${module.vpc.nat_ip}"
+  value = module.vpc.nat_ip
 }
+

@@ -31,7 +31,7 @@ variable "public_subnet_enable" {
 }
 
 variable "public_subnet_cidrs" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
@@ -48,7 +48,7 @@ variable "private_subnet_enable" {
 }
 
 variable "private_subnet_cidrs" {
-  type    = "list"
+  type    = list(string)
   default = []
 }
 
@@ -68,3 +68,4 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   default     = {}
 }
+
