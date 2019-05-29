@@ -6,6 +6,7 @@ terraform {
     bucket = "terraform-nalbam-seoul"
     key    = "vpc-cidr.tfstate"
   }
+  required_version = ">= 0.12"
 }
 
 provider "aws" {
@@ -72,4 +73,3 @@ output "private_subnet_cidr" {
 output "nat_ip" {
   value = module.vpc.nat_ip
 }
-
