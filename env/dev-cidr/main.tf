@@ -4,7 +4,7 @@ terraform {
   backend "s3" {
     region = "ap-northeast-2"
     bucket = "terraform-nalbam-seoul"
-    key    = "vpc.tfstate"
+    key    = "vpc-cidr.tfstate"
   }
   required_version = ">= 0.12"
 }
@@ -19,18 +19,32 @@ module "vpc" {
   region = "ap-northeast-2"
   city   = "SEOUL"
   stage  = "DEV"
-  name   = "DEMO"
+  name   = "CIDR"
 
   # vpc_id   = ""
   vpc_cidr = "10.10.0.0/16"
 
-  public_subnet_enable  = true
-  public_subnet_newbits = 8 # 8 0.0.0.0/24 1 C 256 255.255.255.000
-  public_subnet_netnum  = 1
+  public_subnet_enable = true
+  public_subnet_count = 2
+  public_subnet_zones = [
+    "ap-northeast-2a",
+    "ap-northeast-2c",
+  ]
+  public_subnet_cidrs = [
+    "10.10.0.11/24",
+    "10.10.0.12/24",
+  ]
 
-  private_subnet_enable  = false
-  private_subnet_newbits = 8 # 8 0.0.0.0/24 1 C 256 255.255.255.000
-  private_subnet_netnum  = 4
+  private_subnet_enable = true
+  private_subnet_count = 2
+  private_subnet_zones = [
+    "ap-northeast-2a",
+    "ap-northeast-2c",
+  ]
+  private_subnet_cidrs = [
+    "10.10.0.13/24",
+    "10.10.0.14/24",
+  ]
 
   single_nat_gateway = true
 
