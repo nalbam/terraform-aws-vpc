@@ -1,9 +1,10 @@
 # cluster subnet public
 
 resource "aws_subnet" "public" {
-  count = var.public_subnet_enable ? local.az_count : 0
+  count = local.public_count
 
   vpc_id = data.aws_vpc.this.id
+
   cidr_block = length(var.public_subnet_cidrs) > 0 ? var.public_subnet_cidrs[count.index] : cidrsubnet(
     data.aws_vpc.this.cidr_block,
     var.public_subnet_newbits,
@@ -23,7 +24,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_route_table" "public" {
-  count = var.public_subnet_enable ? local.az_count > 0 ? 1 : 0 : 0
+  count = local.public_count > 0 ? 1 : 0
 
   vpc_id = data.aws_vpc.this.id
 
@@ -41,7 +42,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  count = var.public_subnet_enable ? local.az_count : 0
+  count = local.public_count
 
   route_table_id = aws_route_table.public[0].id
   subnet_id      = aws_subnet.public[count.index].id

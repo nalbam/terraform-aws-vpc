@@ -30,6 +30,10 @@ variable "public_subnet_enable" {
   default = true
 }
 
+variable "public_subnet_count" {
+  default = 0
+}
+
 variable "public_subnet_zones" {
   type    = list(string)
   default = []
@@ -50,6 +54,10 @@ variable "public_subnet_netnum" {
 
 variable "private_subnet_enable" {
   default = true
+}
+
+variable "private_subnet_count" {
+  default = 0
 }
 
 variable "private_subnet_zones" {

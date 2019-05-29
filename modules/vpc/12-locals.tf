@@ -11,8 +11,9 @@ locals {
 
   az_names = data.aws_availability_zones.azs.names
 
-  az_count = length(local.az_names) > 3 ? 3 : length(local.az_names)
+  public_count = var.public_subnet_enable ? public_subnet_count > 0 ? public_subnet_count : length(local.az_names) > 3 ? 3 : length(local.az_names) : 0
+
+  private_count = var.private_subnet_enable ? private_subnet_count > 0 ? private_subnet_count : length(local.az_names) > 3 ? 3 : length(local.az_names) : 0
 
   az_length = length(local.az_names[0])
 }
-

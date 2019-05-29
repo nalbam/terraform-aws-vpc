@@ -25,6 +25,7 @@ module "vpc" {
   vpc_cidr = "10.10.0.0/16"
 
   public_subnet_enable = true
+  public_subnet_count = 2
   public_subnet_zones = [
     "ap-northeast-2a",
     "ap-northeast-2c",
@@ -35,6 +36,7 @@ module "vpc" {
   ]
 
   private_subnet_enable = true
+  private_subnet_count = 2
   private_subnet_zones = [
     "ap-northeast-2a",
     "ap-northeast-2c",
