@@ -6,7 +6,7 @@ resource "aws_subnet" "public" {
   vpc_id     = "${data.aws_vpc.this.id}"
   cidr_block = "${length(var.public_subnet_cidrs) > 0 ? var.public_subnet_cidrs[count.index] : cidrsubnet(data.aws_vpc.this.cidr_block, var.public_subnet_newbits, (count.index + var.public_subnet_netnum))}"
 
-  availability_zone = "${local.az_names[count.index]}"
+  availability_zone = "${length(var.public_subnet_zones) > 0 ? var.public_subnet_zones[count.index] : local.az_names[count.index]}"
 
   tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PUBLIC"), var.tags)}"
 }
