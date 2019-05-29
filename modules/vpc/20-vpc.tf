@@ -38,4 +38,3 @@ data "aws_internet_gateway" "this" {
     values = [var.vpc_id == "" ? element(concat(aws_vpc.this.*.id, [""]), 0) : var.vpc_id]
   }
 }
-

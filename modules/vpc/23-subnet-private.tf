@@ -11,12 +11,12 @@ resource "aws_subnet" "private" {
     count.index + var.private_subnet_netnum,
   )
 
-  availability_zone = length(var.private_subnet_zones) > 0 ? var.private_subnet_zones[count.index] : local.az_names[count.index]
+  availability_zone = local.private_names[count.index]
 
   tags = merge(
     {
       "Name" = "${var.city}-${upper(
-        element(split("", local.az_names[count.index]), local.az_length - 1),
+        element(split("", local.private_names[count.index]), local.private_length - 1),
       )}-${local.name}-PRIVATE"
     },
     var.tags,
@@ -32,7 +32,7 @@ resource "aws_eip" "private" {
   tags = merge(
     {
       "Name" = "${var.city}-${upper(
-        element(split("", local.az_names[count.index]), local.az_length - 1),
+        element(split("", local.private_names[count.index]), local.private_length - 1),
       )}-${local.name}-PRIVATE"
     },
     var.tags,
@@ -48,7 +48,7 @@ resource "aws_nat_gateway" "private" {
   tags = merge(
     {
       "Name" = "${var.city}-${upper(
-        element(split("", local.az_names[count.index]), local.az_length - 1),
+        element(split("", local.private_names[count.index]), local.private_length - 1),
       )}-${local.name}-PRIVATE"
     },
     var.tags,
@@ -68,7 +68,7 @@ resource "aws_route_table" "private" {
   tags = merge(
     {
       "Name" = "${var.city}-${upper(
-        element(split("", local.az_names[count.index]), local.az_length - 1),
+        element(split("", local.private_names[count.index]), local.private_length - 1),
       )}-${local.name}-PRIVATE"
     },
     var.tags,

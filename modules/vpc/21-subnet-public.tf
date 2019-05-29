@@ -11,12 +11,12 @@ resource "aws_subnet" "public" {
     count.index + var.public_subnet_netnum,
   )
 
-  availability_zone = length(var.public_subnet_zones) > 0 ? var.public_subnet_zones[count.index] : local.az_names[count.index]
+  availability_zone = local.public_names[count.index]
 
   tags = merge(
     {
       "Name" = "${var.city}-${upper(
-        element(split("", local.az_names[count.index]), local.az_length - 1),
+        element(split("", local.public_names[count.index]), local.public_length - 1),
       )}-${local.name}-PUBLIC"
     },
     var.tags,
