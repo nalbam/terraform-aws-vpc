@@ -35,7 +35,7 @@ variable "public_subnet_count" {
 }
 
 variable "public_subnet_zones" {
-  type    = list(string)
+  type    = "list"
   default = []
 }
 
@@ -61,7 +61,7 @@ variable "private_subnet_count" {
 }
 
 variable "private_subnet_zones" {
-  type    = list(string)
+  type    = "list"
   default = []
 }
 
