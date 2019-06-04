@@ -6,9 +6,9 @@ resource "aws_subnet" "private" {
   vpc_id     = "${data.aws_vpc.this.id}"
   cidr_block = "${length(var.private_subnet_cidrs) > 0 ? var.private_subnet_cidrs[count.index] : cidrsubnet(data.aws_vpc.this.cidr_block, var.private_subnet_newbits, (count.index + var.private_subnet_netnum))}"
 
-  availability_zone = "${length(var.private_subnet_zones) > 0 ? var.private_subnet_zones[count.index] : local.az_names[count.index]}"
+  availability_zone = "${local.private_names[count.index]}"
 
-  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"), var.tags)}"
+  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.private_names[count.index]), (local.private_length - 1)))}-${local.name}-PRIVATE"), var.tags)}"
 }
 
 resource "aws_eip" "private" {
@@ -17,7 +17,7 @@ resource "aws_eip" "private" {
   vpc        = true
   depends_on = ["aws_route_table.public"]
 
-  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"), var.tags)}"
+  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.private_names[count.index]), (local.private_length - 1)))}-${local.name}-PRIVATE"), var.tags)}"
 }
 
 resource "aws_nat_gateway" "private" {
@@ -26,7 +26,7 @@ resource "aws_nat_gateway" "private" {
   allocation_id = "${element(aws_eip.private.*.id, count.index)}"
   subnet_id     = "${element(aws_subnet.public.*.id, count.index)}"
 
-  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"), var.tags)}"
+  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.private_names[count.index]), (local.private_length - 1)))}-${local.name}-PRIVATE"), var.tags)}"
 }
 
 resource "aws_route_table" "private" {
@@ -39,7 +39,7 @@ resource "aws_route_table" "private" {
     gateway_id = "${element(aws_nat_gateway.private.*.id, count.index)}"
   }
 
-  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.az_names[count.index]), (local.az_length - 1)))}-${local.name}-PRIVATE"), var.tags)}"
+  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.private_names[count.index]), (local.private_length - 1)))}-${local.name}-PRIVATE"), var.tags)}"
 }
 
 resource "aws_route_table_association" "private" {

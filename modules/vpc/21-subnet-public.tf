@@ -7,9 +7,9 @@ resource "aws_subnet" "public" {
 
   cidr_block = "${length(var.public_subnet_cidrs) > 0 ? var.public_subnet_cidrs[count.index] : cidrsubnet(data.aws_vpc.this.cidr_block,var.public_subnet_newbits,count.index + var.public_subnet_netnum,)}"
 
-  availability_zone = "${length(var.public_subnet_zones) > 0 ? var.public_subnet_zones[count.index] : local.az_names[count.index]}"
+  availability_zone = "${local.public_names[count.index]}"
 
-  tags = "${merge({"Name" = "${var.city}-${upper(element(split("", local.az_names[count.index]), local.az_length - 1),)}-${local.name}-PUBLIC"}, var.tags)}"
+  tags = "${merge(map("Name", "${var.city}-${upper(element(split("", local.public_names[count.index]), local.public_length - 1),)}-${local.name}-PUBLIC"), var.tags)}"
 }
 
 resource "aws_route_table" "public" {
