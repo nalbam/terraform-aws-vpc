@@ -17,9 +17,9 @@ module "vpc" {
   source = "../../modules/vpc"
 
   region = "ap-northeast-2"
-  city   = "SEOUL"
-  stage  = "DEV"
-  name   = "CIDR"
+  city   = "seoul"
+  stage  = "dev"
+  name   = "cidr"
 
   # vpc_id   = ""
   vpc_cidr = "10.10.0.0/16"

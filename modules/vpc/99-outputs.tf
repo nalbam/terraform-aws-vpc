@@ -27,4 +27,3 @@ output "private_subnet_cidr" {
 output "nat_ip" {
   value = aws_eip.private.*.public_ip
 }
-
