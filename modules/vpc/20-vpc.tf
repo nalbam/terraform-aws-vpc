@@ -15,10 +15,6 @@ resource "aws_vpc" "this" {
   )
 }
 
-data "aws_vpc" "this" {
-  id = var.vpc_id == "" ? element(concat(aws_vpc.this.*.id, [""]), 0) : var.vpc_id
-}
-
 resource "aws_internet_gateway" "this" {
   count = var.vpc_id == "" ? 1 : 0
 
@@ -30,11 +26,4 @@ resource "aws_internet_gateway" "this" {
     },
     var.tags,
   )
-}
-
-data "aws_internet_gateway" "this" {
-  filter {
-    name   = "attachment.vpc-id"
-    values = [var.vpc_id == "" ? element(concat(aws_vpc.this.*.id, [""]), 0) : var.vpc_id]
-  }
 }
