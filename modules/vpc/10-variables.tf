@@ -40,14 +40,6 @@ variable "public_subnet_cidrs" {
   default = []
 }
 
-variable "public_subnet_newbits" {
-  default = 4
-}
-
-variable "public_subnet_netnum" {
-  default = 0
-}
-
 variable "private_subnet_enable" {
   default = true
 }
@@ -60,14 +52,6 @@ variable "private_subnet_zones" {
 variable "private_subnet_cidrs" {
   type    = list(string)
   default = []
-}
-
-variable "private_subnet_newbits" {
-  default = 2
-}
-
-variable "private_subnet_netnum" {
-  default = 1
 }
 
 variable "single_nat_gateway" {

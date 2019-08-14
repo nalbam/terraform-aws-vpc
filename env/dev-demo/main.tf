@@ -24,13 +24,29 @@ module "vpc" {
   vpc_id   = ""
   vpc_cidr = "10.10.0.0/16"
 
-  public_subnet_enable  = true
-  public_subnet_newbits = 8 # 8 0.0.0.0/24 1 C 256 255.255.255.000
-  public_subnet_netnum  = 1 # (1,2,3)
+  public_subnet_enable = true
+  public_subnet_zones = [
+    "ap-northeast-2a",
+    "ap-northeast-2b",
+    "ap-northeast-2c",
+  ]
+  public_subnet_cidrs = [
+    "10.10.1.0/24",
+    "10.10.2.0/24",
+    "10.10.3.0/24",
+  ]
 
-  private_subnet_enable  = false
-  private_subnet_newbits = 8 # 8 0.0.0.0/24 1 C 256 255.255.255.000
-  private_subnet_netnum  = 4 # (4,5,6)
+  private_subnet_enable = false
+  private_subnet_zones = [
+    "ap-northeast-2a",
+    "ap-northeast-2b",
+    "ap-northeast-2c",
+  ]
+  private_subnet_cidrs = [
+    "10.10.4.0/24",
+    "10.10.5.0/24",
+    "10.10.6.0/24",
+  ]
 
   single_nat_gateway = true
 

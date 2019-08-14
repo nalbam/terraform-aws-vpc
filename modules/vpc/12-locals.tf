@@ -11,13 +11,13 @@ locals {
 
   public_count = var.public_subnet_enable ? length(var.public_subnet_zones) > 0 ? length(var.public_subnet_zones) : length(local.az_names) > 3 ? 3 : length(local.az_names) : 0
 
-  public_names = length(var.public_subnet_zones) > 0 ? var.public_subnet_zones : data.az_names
+  public_names = length(var.public_subnet_zones) > 0 ? var.public_subnet_zones : local.az_names
 
-  public_length = length(var.public_subnet_zones) > 0 ? length(var.public_subnet_zones[0]) : length(data.az_names[0])
+  public_length = length(var.public_subnet_zones) > 0 ? length(var.public_subnet_zones[0]) : length(local.az_names[0])
 
   private_count = var.private_subnet_enable ? length(var.private_subnet_zones) > 0 ? length(var.private_subnet_zones) : length(local.az_names) > 3 ? 3 : length(local.az_names) : 0
 
-  private_names = length(var.private_subnet_zones) > 0 ? var.private_subnet_zones : data.az_names
+  private_names = length(var.private_subnet_zones) > 0 ? var.private_subnet_zones : local.az_names
 
-  private_length = length(var.private_subnet_zones) > 0 ? length(var.private_subnet_zones[0]) : length(data.az_names[0])
+  private_length = length(var.private_subnet_zones) > 0 ? length(var.private_subnet_zones[0]) : length(local.az_names[0])
 }
