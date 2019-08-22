@@ -36,7 +36,7 @@ module "vpc" {
     "10.10.3.0/24",
   ]
 
-  private_subnet_enable = false
+  private_subnet_enable = true
   private_subnet_zones = [
     "ap-northeast-2a",
     "ap-northeast-2b",
@@ -48,7 +48,7 @@ module "vpc" {
     "10.10.6.0/24",
   ]
 
-  single_nat_gateway = true
+  single_nat_gateway = false
 
   tags = {
     "kubernetes.io/cluster/seoul-dev-demo-eks" = "shared"
