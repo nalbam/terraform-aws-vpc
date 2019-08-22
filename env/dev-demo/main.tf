@@ -52,7 +52,6 @@ module "vpc" {
 
   tags = {
     "kubernetes.io/cluster/seoul-dev-demo-eks" = "shared"
-    "kubernetes.io/cluster/seoul-dev-spot-eks" = "shared"
   }
 }
 
