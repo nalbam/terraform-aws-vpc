@@ -4,16 +4,8 @@ variable "region" {
   description = "The region to deploy the cluster in, e.g: us-east-1"
 }
 
-variable "city" {
-  description = "City Name of the cluster, e.g: virginia"
-}
-
-variable "stage" {
-  description = "Stage Name of the cluster, e.g: dev"
-}
-
 variable "name" {
-  description = "Name of the cluster, e.g: demo"
+  description = "Name of the cluster, e.g: seoul-dev-demo"
 }
 
 variable "vpc_id" {

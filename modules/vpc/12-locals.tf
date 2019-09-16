@@ -1,9 +1,7 @@
 # locals
 
 locals {
-  name = "${var.stage}-${var.name}"
-
-  full_name = "${var.city}-${var.stage}-${var.name}"
+  name = "${var.name}"
 
   az_names = data.aws_availability_zones.azs.names
 

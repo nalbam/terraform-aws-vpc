@@ -11,7 +11,7 @@ resource "aws_subnet" "public" {
 
   tags = merge(
     {
-      "Name" = "${var.city}-${element(split("", local.public_names[count.index]), local.public_length - 1)}-${local.name}-public"
+      "Name" = "${var.name}-public-${element(split("", local.public_names[count.index]), local.public_length - 1)}"
     },
     var.tags,
   )
@@ -29,7 +29,7 @@ resource "aws_route_table" "public" {
 
   tags = merge(
     {
-      "Name" = "${local.full_name}-public"
+      "Name" = "${var.name}-public"
     },
     var.tags,
   )

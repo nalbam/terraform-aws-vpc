@@ -9,7 +9,7 @@ resource "aws_vpc" "this" {
 
   tags = merge(
     {
-      "Name" = local.full_name
+      "Name" = var.name
     },
     var.tags,
   )
@@ -22,7 +22,7 @@ resource "aws_internet_gateway" "this" {
 
   tags = merge(
     {
-      "Name" = local.full_name
+      "Name" = var.name
     },
     var.tags,
   )

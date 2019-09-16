@@ -11,7 +11,7 @@ resource "aws_subnet" "private" {
 
   tags = merge(
     {
-      "Name" = "${var.city}-${element(split("", local.private_names[count.index]), local.private_length - 1)}-${local.name}-private"
+      "Name" = "${var.name}-private-${element(split("", local.public_names[count.index]), local.public_length - 1)}"
     },
     var.tags,
   )
@@ -25,7 +25,7 @@ resource "aws_eip" "private" {
 
   tags = merge(
     {
-      "Name" = "${var.city}-${element(split("", local.private_names[count.index]), local.private_length - 1)}-${local.name}-private"
+      "Name" = "${var.name}-private-${element(split("", local.public_names[count.index]), local.public_length - 1)}"
     },
     var.tags,
   )
@@ -39,7 +39,7 @@ resource "aws_nat_gateway" "private" {
 
   tags = merge(
     {
-      "Name" = "${var.city}-${element(split("", local.private_names[count.index]), local.private_length - 1)}-${local.name}-private"
+      "Name" = "${var.name}-private-${element(split("", local.public_names[count.index]), local.public_length - 1)}"
     },
     var.tags,
   )
@@ -57,7 +57,7 @@ resource "aws_route_table" "private" {
 
   tags = merge(
     {
-      "Name" = "${var.city}-${element(split("", local.private_names[count.index]), local.private_length - 1)}-${local.name}-private"
+      "Name" = "${var.name}-private-${element(split("", local.public_names[count.index]), local.public_length - 1)}"
     },
     var.tags,
   )
