@@ -51,7 +51,6 @@ module "vpc" {
   single_nat_gateway = true
 
   tags = {
-    "kubernetes.io/cluster/seoul-dev-demo-eks" = "shared"
     "kubernetes.io/cluster/seoul-dev-spot-eks" = "shared"
   }
 }
