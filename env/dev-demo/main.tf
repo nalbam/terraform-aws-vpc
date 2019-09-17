@@ -1,4 +1,4 @@
-# bastion
+# vpc
 
 terraform {
   backend "s3" {
@@ -10,74 +10,20 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-northeast-2"
+  region = var.region
 }
 
 module "vpc" {
   source = "../../modules/vpc"
 
-  region = "ap-northeast-2"
-  name   = "seoul-dev-demo"
+  region = var.region
+  name   = var.name
 
-  vpc_id   = ""
-  vpc_cidr = "10.10.0.0/16"
+  vpc_id   = var.vpc_id
+  vpc_cidr = var.vpc_cidr
 
-  public_subnet_enable = true
-  public_subnet_zones = [
-    "ap-northeast-2a",
-    "ap-northeast-2b",
-    "ap-northeast-2c",
-  ]
-  public_subnet_cidrs = [
-    "10.10.1.0/24",
-    "10.10.2.0/24",
-    "10.10.3.0/24",
-  ]
+  public_subnets  = var.public_subnets
+  private_subnets = var.private_subnets
 
-  private_subnet_enable = false
-  private_subnet_zones = [
-    "ap-northeast-2a",
-    "ap-northeast-2b",
-    "ap-northeast-2c",
-  ]
-  private_subnet_cidrs = [
-    "10.10.4.0/24",
-    "10.10.5.0/24",
-    "10.10.6.0/24",
-  ]
-
-  single_nat_gateway = true
-
-  tags = {
-    "kubernetes.io/cluster/seoul-dev-demo-eks" = "shared"
-    "kubernetes.io/cluster/seoul-dev-spot-eks" = "shared"
-  }
-}
-
-output "vpc_id" {
-  value = module.vpc.vpc_id
-}
-
-output "vpc_cidr" {
-  value = module.vpc.vpc_cidr
-}
-
-output "public_subnet_ids" {
-  value = module.vpc.public_subnet_ids
-}
-
-output "public_subnet_cidr" {
-  value = module.vpc.public_subnet_cidr
-}
-
-output "private_subnet_ids" {
-  value = module.vpc.private_subnet_ids
-}
-
-output "private_subnet_cidr" {
-  value = module.vpc.private_subnet_cidr
-}
-
-output "nat_ip" {
-  value = module.vpc.nat_ip
+  tags = var.tags
 }

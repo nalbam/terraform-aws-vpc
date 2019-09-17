@@ -1,24 +1,24 @@
 # cluster subnet public
 
 resource "aws_subnet" "public" {
-  count = local.public_count
+  count = length(var.public_subnets)
 
   vpc_id = data.aws_vpc.this.id
 
-  cidr_block = var.public_subnet_cidrs[count.index]
+  availability_zone = var.public_subnets[count.index].zone
 
-  availability_zone = local.public_names[count.index]
+  cidr_block = var.public_subnets[count.index].cidr
 
   tags = merge(
     {
-      Name = "${var.name}-public-${element(split("", local.public_names[count.index]), local.public_length - 1)}"
+      Name = "${var.name}-public-${element(split("", var.public_subnets[count.index].zone), length(var.public_subnets[count.index].zone) - 1)}"
     },
     var.tags,
   )
 }
 
 resource "aws_route_table" "public" {
-  count = local.public_count > 0 ? 1 : 0
+  count = length(var.public_subnets) > 0 ? 1 : 0
 
   vpc_id = data.aws_vpc.this.id
 
@@ -36,7 +36,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table_association" "public" {
-  count = local.public_count
+  count = length(var.public_subnets)
 
   route_table_id = aws_route_table.public[0].id
   subnet_id      = aws_subnet.public[count.index].id

@@ -18,36 +18,20 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "public_subnet_enable" {
-  default = true
-}
-
-variable "public_subnet_zones" {
-  type    = list(string)
+variable "public_subnets" {
+  type = list(object({
+    zone = string
+    cidr = string
+  }))
   default = []
 }
 
-variable "public_subnet_cidrs" {
-  type    = list(string)
+variable "private_subnets" {
+  type = list(object({
+    zone = string
+    cidr = string
+  }))
   default = []
-}
-
-variable "private_subnet_enable" {
-  default = true
-}
-
-variable "private_subnet_zones" {
-  type    = list(string)
-  default = []
-}
-
-variable "private_subnet_cidrs" {
-  type    = list(string)
-  default = []
-}
-
-variable "single_nat_gateway" {
-  default = false
 }
 
 variable "tags" {

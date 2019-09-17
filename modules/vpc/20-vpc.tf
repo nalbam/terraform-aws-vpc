@@ -18,7 +18,7 @@ resource "aws_vpc" "this" {
 resource "aws_internet_gateway" "this" {
   count = var.vpc_id == "" ? 1 : 0
 
-  vpc_id = element(concat(aws_vpc.this.*.id, [""]), 0)
+  vpc_id = local.vpc_id
 
   tags = merge(
     {
