@@ -3,7 +3,7 @@
 resource "aws_subnet" "public" {
   count = length(var.public_subnets)
 
-  vpc_id = data.aws_vpc.this.id
+  vpc_id = local.vpc_id
 
   availability_zone = var.public_subnets[count.index].zone
 
@@ -20,11 +20,11 @@ resource "aws_subnet" "public" {
 resource "aws_route_table" "public" {
   count = length(var.public_subnets) > 0 ? 1 : 0
 
-  vpc_id = data.aws_vpc.this.id
+  vpc_id = local.vpc_id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = data.aws_internet_gateway.this.id
+    gateway_id = local.gateway_id
   }
 
   tags = merge(

@@ -1,11 +1,7 @@
 # output
 
 output "vpc_id" {
-  value = data.aws_vpc.this.id
-}
-
-output "vpc_cidr" {
-  value = data.aws_vpc.this.cidr_block
+  value = local.vpc_id
 }
 
 output "public_subnet_ids" {

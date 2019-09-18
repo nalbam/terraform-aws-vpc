@@ -4,7 +4,7 @@ terraform {
   backend "s3" {
     region = "ap-northeast-2"
     bucket = "terraform-mz-seoul"
-    key    = "vpc.tfstate"
+    key    = "vpc-demo.tfstate"
   }
   required_version = ">= 0.12"
 }

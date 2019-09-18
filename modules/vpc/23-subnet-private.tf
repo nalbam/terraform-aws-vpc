@@ -3,7 +3,7 @@
 resource "aws_subnet" "private" {
   count = length(var.private_subnets)
 
-  vpc_id = data.aws_vpc.this.id
+  vpc_id = local.vpc_id
 
   availability_zone = var.private_subnets[count.index].zone
 
@@ -48,7 +48,7 @@ resource "aws_nat_gateway" "private" {
 resource "aws_route_table" "private" {
   count = length(var.private_subnets) > 0 ? 1 : 0
 
-  vpc_id = data.aws_vpc.this.id
+  vpc_id = local.vpc_id
 
   route {
     cidr_block = "0.0.0.0/0"
