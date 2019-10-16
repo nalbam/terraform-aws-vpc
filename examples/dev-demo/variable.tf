@@ -35,18 +35,18 @@ variable "public_subnets" {
 
 variable "private_subnets" {
   default = [
-    {
-      zone = "ap-northeast-2a"
-      cidr = "10.10.4.0/24"
-    },
-    {
-      zone = "ap-northeast-2b"
-      cidr = "10.10.5.0/24"
-    },
-    {
-      zone = "ap-northeast-2c"
-      cidr = "10.10.6.0/24"
-    },
+    # {
+    #   zone = "ap-northeast-2a"
+    #   cidr = "10.10.4.0/24"
+    # },
+    # {
+    #   zone = "ap-northeast-2b"
+    #   cidr = "10.10.5.0/24"
+    # },
+    # {
+    #   zone = "ap-northeast-2c"
+    #   cidr = "10.10.6.0/24"
+    # },
   ]
 }
 
