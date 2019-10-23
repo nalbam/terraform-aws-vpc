@@ -4,8 +4,8 @@
 # terraform
 brew install terraform
 
-# env
-cd env/dev-demo
+# examples
+cd examples/dev-demo
 
 # terraform (5m)
 terraform init
