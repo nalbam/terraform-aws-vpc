@@ -14,6 +14,7 @@ resource "aws_subnet" "private" {
       Name = "${var.name}-private-${element(split("", var.private_subnets[count.index].zone), length(var.private_subnets[count.index].zone) - 1)}"
     },
     var.tags,
+    var.private_tags,
   )
 }
 
@@ -28,6 +29,7 @@ resource "aws_eip" "private" {
       Name = "${var.name}-private"
     },
     var.tags,
+    var.private_tags,
   )
 }
 
@@ -42,6 +44,7 @@ resource "aws_nat_gateway" "private" {
       Name = "${var.name}-private"
     },
     var.tags,
+    var.private_tags,
   )
 }
 
@@ -60,6 +63,7 @@ resource "aws_route_table" "private" {
       Name = "${var.name}-private"
     },
     var.tags,
+    var.private_tags,
   )
 }
 

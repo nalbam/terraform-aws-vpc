@@ -14,6 +14,7 @@ resource "aws_subnet" "public" {
       Name = "${var.name}-public-${element(split("", var.public_subnets[count.index].zone), length(var.public_subnets[count.index].zone) - 1)}"
     },
     var.tags,
+    var.public_tags,
   )
 }
 
@@ -32,6 +33,7 @@ resource "aws_route_table" "public" {
       Name = "${var.name}-public"
     },
     var.tags,
+    var.public_tags,
   )
 }
 

@@ -38,3 +38,13 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   default     = {}
 }
+
+variable "public_tags" {
+  description = "A map of tags to add to public resources"
+  default     = {}
+}
+
+variable "private_tags" {
+  description = "A map of tags to add to private resources"
+  default     = {}
+}
