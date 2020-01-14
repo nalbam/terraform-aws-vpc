@@ -19,7 +19,7 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_eip" "private" {
-  count = length(var.private_subnets) > 0 ? single_nat_gateway ? 1 : length(var.private_subnets) : 0
+  count = length(var.private_subnets) > 0 ? var.single_nat_gateway ? 1 : length(var.private_subnets) : 0
 
   vpc        = true
   depends_on = [aws_route_table.public]
@@ -34,7 +34,7 @@ resource "aws_eip" "private" {
 }
 
 resource "aws_nat_gateway" "private" {
-  count = length(var.private_subnets) > 0 ? single_nat_gateway ? 1 : length(var.private_subnets) : 0
+  count = length(var.private_subnets) > 0 ? var.single_nat_gateway ? 1 : length(var.private_subnets) : 0
 
   allocation_id = aws_eip.private[count.index].id
   subnet_id     = aws_subnet.public[count.index].id
@@ -49,7 +49,7 @@ resource "aws_nat_gateway" "private" {
 }
 
 resource "aws_route_table" "private" {
-  count = length(var.private_subnets) > 0 ? single_nat_gateway ? 1 : length(var.private_subnets) : 0
+  count = length(var.private_subnets) > 0 ? var.single_nat_gateway ? 1 : length(var.private_subnets) : 0
 
   vpc_id = local.vpc_id
 
