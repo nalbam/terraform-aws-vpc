@@ -34,6 +34,10 @@ variable "private_subnets" {
   default = []
 }
 
+variable "single_nat_gateway" {
+  default = true
+}
+
 variable "tags" {
   description = "A map of tags to add to all resources"
   default     = {}
