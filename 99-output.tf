@@ -4,6 +4,10 @@ output "vpc_id" {
   value = local.vpc_id
 }
 
+output "gateway_id" {
+  value = local.gateway_id
+}
+
 output "public_subnet_ids" {
   value = aws_subnet.public.*.id
 }
@@ -14,6 +18,10 @@ output "public_subnet_cidr" {
 
 output "public_subnet_azs" {
   value = aws_subnet.public.*.availability_zone
+}
+
+output "public_route_table_ids" {
+  value = aws_route_table.public.*.id
 }
 
 output "private_subnet_ids" {
@@ -28,6 +36,14 @@ output "private_subnet_azs" {
   value = aws_subnet.private.*.availability_zone
 }
 
-output "nat_ip" {
+output "private_route_table_ids" {
+  value = aws_route_table.private.*.id
+}
+
+output "nat_gateway_ids" {
+  value = aws_nat_gateway.private.*.id
+}
+
+output "nat_gateway_ips" {
   value = aws_eip.private.*.public_ip
 }

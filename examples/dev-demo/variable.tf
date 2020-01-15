@@ -16,6 +16,14 @@ variable "vpc_cidr" {
   default = "10.10.0.0/16"
 }
 
+variable "enable_nat_gateway" {
+  default = true
+}
+
+variable "single_nat_gateway" {
+  default = true
+}
+
 variable "public_subnets" {
   default = [
     {
