@@ -24,10 +24,10 @@ resource "aws_subnet" "public" {
 resource "aws_route_table_association" "public" {
   count = length(var.public_subnets)
 
+  subnet_id = aws_subnet.public[count.index].id
+
   route_table_id = element(
     aws_route_table.public.*.id,
     var.single_route_table ? 0 : local.zone_index[element(split("", var.public_subnets[count.index].zone), length(var.public_subnets[count.index].zone) - 1)]
   )
-
-  subnet_id = aws_subnet.public[count.index].id
 }
