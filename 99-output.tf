@@ -4,10 +4,6 @@ output "vpc_id" {
   value = local.vpc_id
 }
 
-output "gateway_id" {
-  value = local.gateway_id
-}
-
 output "public_subnet_ids" {
   value = aws_subnet.public.*.id
 }
