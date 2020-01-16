@@ -10,7 +10,12 @@ locals {
     length(var.private_subnets),
   )
 
-  zone_count = local.max_subnet_count < 1 ? 0 : var.single_route_table ? 1 : length(data.aws_availability_zones.azs.names) > 3 ? 3 : length(data.aws_availability_zones.azs.names)
+  min_azs_count = min(
+    length(data.aws_availability_zones.azs.names),
+    3,
+  )
+
+  zone_count = local.max_subnet_count < 1 ? 0 : var.single_route_table ? 1 : local.min_azs_count
   zone_index = {
     "a" = 0,
     "b" = 1,
