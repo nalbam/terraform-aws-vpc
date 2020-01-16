@@ -20,7 +20,7 @@ resource "aws_route_table" "public" {
 resource "aws_route" "public" {
   count = local.zone_count
 
-  route_table_id         = aws_route_table.public[0].id
+  route_table_id         = aws_route_table.public[count.index].id
   destination_cidr_block = "0.0.0.0/0"
   gateway_id             = local.gateway_id
 
