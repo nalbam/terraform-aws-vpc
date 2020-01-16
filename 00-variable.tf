@@ -64,6 +64,12 @@ variable "enable_dns_support" {
 #   default     = false
 # }
 
+variable "single_route_table" {
+  description = "Should be true if you want to provision a single shared Route Table across all of your public networks"
+  type        = bool
+  default     = false
+}
+
 variable "enable_nat_gateway" {
   description = "Should be true if you want to provision NAT Gateways for each of your private networks"
   type        = bool

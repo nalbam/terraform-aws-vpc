@@ -12,7 +12,7 @@ resource "aws_eip" "private" {
       Name = format(
         "%s-private-%s",
         var.name,
-        element(split("", var.public_subnets[count.index].zone), length(var.public_subnets[count.index].zone) - 1)
+        element(split("", data.aws_availability_zones.azs.names[count.index]), length(data.aws_availability_zones.azs.names[count.index]) - 1)
       )
     },
     var.tags,
@@ -31,7 +31,7 @@ resource "aws_nat_gateway" "private" {
       Name = format(
         "%s-private-%s",
         var.name,
-        element(split("", var.public_subnets[count.index].zone), length(var.public_subnets[count.index].zone) - 1)
+        element(split("", data.aws_availability_zones.azs.names[count.index]), length(data.aws_availability_zones.azs.names[count.index]) - 1)
       )
     },
     var.tags,
@@ -42,11 +42,6 @@ resource "aws_route_table" "private" {
   count = local.nat_gateway_count
 
   vpc_id = local.vpc_id
-
-  # route {
-  #   cidr_block = "0.0.0.0/0"
-  #   gateway_id = aws_nat_gateway.private[count.index].id
-  # }
 
   lifecycle {
     # When attaching VPN gateways it is common to define aws_vpn_gateway_route_propagation
@@ -59,7 +54,7 @@ resource "aws_route_table" "private" {
       Name = format(
         "%s-private-%s",
         var.name,
-        element(split("", var.public_subnets[count.index].zone), length(var.public_subnets[count.index].zone) - 1)
+        element(split("", data.aws_availability_zones.azs.names[count.index]), length(data.aws_availability_zones.azs.names[count.index]) - 1)
       )
     },
     var.tags,

@@ -24,6 +24,8 @@ module "vpc" {
   vpc_id   = var.vpc_id
   vpc_cidr = var.vpc_cidr
 
+  single_route_table = var.single_route_table
+
   enable_nat_gateway = var.enable_nat_gateway
   single_nat_gateway = var.single_nat_gateway
 

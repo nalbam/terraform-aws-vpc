@@ -16,10 +16,6 @@ output "public_subnet_cidr" {
   value = module.vpc.public_subnet_cidr
 }
 
-output "public_subnet_azs" {
-  value = module.vpc.public_subnet_azs
-}
-
 output "public_route_table_ids" {
   value = module.vpc.public_route_table_ids
 }
@@ -30,10 +26,6 @@ output "private_subnet_ids" {
 
 output "private_subnet_cidr" {
   value = module.vpc.private_subnet_cidr
-}
-
-output "private_subnet_azs" {
-  value = module.vpc.private_subnet_azs
 }
 
 output "private_route_table_ids" {
