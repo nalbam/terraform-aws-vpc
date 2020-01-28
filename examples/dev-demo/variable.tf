@@ -33,14 +33,23 @@ variable "public_subnets" {
     {
       zone = "ap-northeast-2a"
       cidr = "10.10.1.0/24"
+      tags = {
+        "kubernetes.io/cluster/seoul-dev-demo-eks-a" = "shared"
+      }
     },
     {
       zone = "ap-northeast-2b"
       cidr = "10.10.2.0/24"
+      tags = {
+        "kubernetes.io/cluster/seoul-dev-demo-eks-b" = "shared"
+      }
     },
     {
       zone = "ap-northeast-2c"
       cidr = "10.10.3.0/24"
+      tags = {
+        "kubernetes.io/cluster/seoul-dev-demo-eks-c" = "shared"
+      }
     },
   ]
 }
@@ -50,14 +59,17 @@ variable "private_subnets" {
     {
       zone = "ap-northeast-2a"
       cidr = "10.10.4.0/24"
+      tags = {}
     },
     {
       zone = "ap-northeast-2b"
       cidr = "10.10.5.0/24"
+      tags = {}
     },
     {
       zone = "ap-northeast-2c"
       cidr = "10.10.6.0/24"
+      tags = {}
     },
   ]
 }
