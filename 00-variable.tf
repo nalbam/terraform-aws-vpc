@@ -83,18 +83,20 @@ variable "single_nat_gateway" {
 }
 
 variable "public_subnets" {
-  type = list(object({
-    zone = string
-    cidr = string
-  }))
+  # type = list(object({
+  #   zone = string
+  #   cidr = string
+  #   tags = map
+  # }))
   default = []
 }
 
 variable "private_subnets" {
-  type = list(object({
-    zone = string
-    cidr = string
-  }))
+  # type = list(object({
+  #   zone = string
+  #   cidr = string
+  #   tags = map
+  # }))
   default = []
 }
 

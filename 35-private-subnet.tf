@@ -17,6 +17,7 @@ resource "aws_subnet" "private" {
         element(split("", var.private_subnets[count.index].zone), length(var.private_subnets[count.index].zone) - 1)
       )
     },
+    var.private_subnets[count.index].tags,
     var.tags,
   )
 }
