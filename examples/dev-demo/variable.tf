@@ -5,7 +5,7 @@ variable "region" {
 }
 
 variable "name" {
-  default = "seoul-dev-demo"
+  default = "dev-demo"
 }
 
 variable "vpc_id" {
@@ -30,6 +30,6 @@ variable "single_nat_gateway" {
 
 variable "tags" {
   default = {
-    "kubernetes.io/cluster/seoul-dev-demo-eks" = "shared"
+    "kubernetes.io/cluster/dev-demo-eks" = "shared"
   }
 }
