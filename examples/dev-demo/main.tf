@@ -3,9 +3,9 @@
 terraform {
   backend "s3" {
     region         = "ap-northeast-2"
-    bucket         = "terraform-mz-seoul"
+    bucket         = "terraform-mz-demo-seoul"
     key            = "vpc-demo.tfstate"
-    dynamodb_table = "terraform-mz-seoul"
+    dynamodb_table = "terraform-mz-demo-seoul"
     encrypt        = true
   }
   required_version = ">= 0.12"
@@ -16,7 +16,8 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "../.."
+  # source = "github.com/nalbam/terraform-aws-vpc?ref=v0.12.29"
+  source = "../../"
 
   region = var.region
   name   = var.name
@@ -32,5 +33,5 @@ module "vpc" {
   public_subnets  = local.public_subnets
   private_subnets = local.private_subnets
 
-  tags = var.tags
+  tags = local.common_tags
 }

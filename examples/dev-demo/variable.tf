@@ -25,11 +25,5 @@ variable "enable_nat_gateway" {
 }
 
 variable "single_nat_gateway" {
-  default = true
-}
-
-variable "tags" {
-  default = {
-    "kubernetes.io/cluster/dev-demo-eks" = "shared"
-  }
+  default = false
 }

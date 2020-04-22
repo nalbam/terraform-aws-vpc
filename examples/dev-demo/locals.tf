@@ -1,6 +1,10 @@
 # locals
 
 locals {
+  common_tags = {
+    "kubernetes.io/cluster/eks-demo" = "shared"
+  }
+
   public_subnets = [
     {
       name = "${var.name}-public-a"
