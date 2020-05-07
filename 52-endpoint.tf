@@ -7,7 +7,7 @@ resource "aws_vpc_endpoint" "s3_endpoint" {
 
   tags = merge(
     {
-      Name = format("%s", var.name)
+      Name = format("%s-%s", var.name, "s3")
     },
     var.tags,
   )
@@ -30,7 +30,7 @@ resource "aws_vpc_endpoint" "dynamodb_endpoint" {
 
   tags = merge(
     {
-      Name = format("%s", var.name)
+      Name = format("%s-%s", var.name, "dynamodb")
     },
     var.tags,
   )
