@@ -5,7 +5,7 @@ variable "region" {
 }
 
 variable "name" {
-  default = "dev-demo"
+  default = "vpc-demo"
 }
 
 variable "vpc_id" {
