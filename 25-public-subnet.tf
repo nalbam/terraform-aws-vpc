@@ -6,12 +6,15 @@ resource "aws_subnet" "public" {
   vpc_id = local.vpc_id
 
   availability_zone = var.public_subnets[count.index].zone
-
-  cidr_block = var.public_subnets[count.index].cidr
+  cidr_block        = var.public_subnets[count.index].cidr
 
   tags = merge(
     {
-      Name = var.public_subnets[count.index].name
+      Name = format(
+        "%s-%s",
+        var.name,
+        var.public_subnets[count.index].name
+      )
     },
     var.public_subnets[count.index].tags,
     var.tags,
