@@ -30,8 +30,8 @@ module "vpc" {
   enable_nat_gateway = var.enable_nat_gateway
   single_nat_gateway = var.single_nat_gateway
 
-  public_subnets  = local.public_subnets
-  private_subnets = local.private_subnets
+  public_subnets  = var.public_subnets
+  private_subnets = var.private_subnets
 
-  tags = local.common_tags
+  tags = var.tags
 }
