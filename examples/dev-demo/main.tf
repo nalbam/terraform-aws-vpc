@@ -3,9 +3,9 @@
 terraform {
   backend "s3" {
     region         = "ap-northeast-2"
-    bucket         = "terraform-mz-demo-seoul"
+    bucket         = "terraform-nalbam-seoul"
     key            = "vpc-demo.tfstate"
-    dynamodb_table = "terraform-mz-demo-seoul"
+    dynamodb_table = "terraform-nalbam-seoul"
     encrypt        = true
   }
   required_version = ">= 0.12"
