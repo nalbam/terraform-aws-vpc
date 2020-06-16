@@ -17,7 +17,7 @@ resource "aws_vpc_endpoint" "s3_endpoint" {
 resource "aws_vpc_endpoint_route_table_association" "s3_endpoint_routetable" {
   count = local.nat_gateway_count
 
-  vpc_endpoint_id = aws_vpc_endpoint.s3_endpoint.0.id
+  vpc_endpoint_id = aws_vpc_endpoint.s3_endpoint[0].id
   route_table_id  = aws_route_table.private[count.index].id
 }
 
@@ -40,6 +40,6 @@ resource "aws_vpc_endpoint" "dynamodb_endpoint" {
 resource "aws_vpc_endpoint_route_table_association" "dynamodb_endpoint_routetable" {
   count = local.nat_gateway_count
 
-  vpc_endpoint_id = aws_vpc_endpoint.dynamodb_endpoint.0.id
+  vpc_endpoint_id = aws_vpc_endpoint.dynamodb_endpoint[0].id
   route_table_id  = aws_route_table.private[count.index].id
 }
