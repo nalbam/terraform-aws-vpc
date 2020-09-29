@@ -1,6 +1,7 @@
 # vpc
 
 terraform {
+  required_version = ">= 0.13"
   backend "s3" {
     region         = "ap-northeast-2"
     bucket         = "terraform-workshop-147748575754"
@@ -8,7 +9,6 @@ terraform {
     dynamodb_table = "terraform-workshop-147748575754"
     encrypt        = true
   }
-  required_version = ">= 0.12"
 }
 
 provider "aws" {
