@@ -4,7 +4,7 @@ terraform {
   backend "s3" {
     region         = "ap-northeast-2"
     bucket         = "terraform-workshop-968005369378"
-    key            = "vpc-demo.tfstate"
+    key            = "vpc-public.tfstate"
     dynamodb_table = "terraform-workshop-968005369378"
     encrypt        = true
   }
