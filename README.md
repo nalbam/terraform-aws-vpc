@@ -1,5 +1,6 @@
 # terraform-aws-vpc
 
+<!--- BEGIN_TF_DOCS --->
 ## Requirements
 
 No requirements.
@@ -44,3 +45,5 @@ No requirements.
 | public\_subnet\_cidr | n/a |
 | public\_subnet\_ids | n/a |
 | vpc\_id | n/a |
+
+<!--- END_TF_DOCS --->
