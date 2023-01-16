@@ -1,6 +1,6 @@
 # terraform-aws-vpc
 
-[![build](https://img.shields.io/github/workflow/status/nalbam/terraform-aws-vpc/build?label=build&style=for-the-badge&logo=github)](https://github.com/nalbam/terraform-aws-vpc/actions/workflows/push.yaml)
+[![build](https://img.shields.io/github/actions/workflow/status/nalbam/terraform-aws-vpc/push.yml?branch=main&style=for-the-badge&logo=github)](https://github.com/nalbam/terraform-aws-vpc/actions/workflows/push.yml)
 [![release](https://img.shields.io/github/v/release/nalbam/terraform-aws-vpc?style=for-the-badge&logo=github)](https://github.com/nalbam/terraform-aws-vpc/releases)
 
 <!--- BEGIN_TF_DOCS --->
